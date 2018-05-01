@@ -34,7 +34,7 @@ Callback function fired when using `toggle` function provided by render prop. Th
 
 **type**: `Function`
 
-**@params**: `Boolean` - Toggle state
+**params**: `Boolean` - Toggle state
 
 ## Events
 
@@ -42,19 +42,19 @@ Callback function fired when using `toggle` function provided by render prop. Th
 
 Fired when the `setOn` function provided by the render prop is invoked.
 
-**@params**: `Boolean` - Toggle state
+**params**: `Boolean` - Toggle state
 
 ### @setOff
 
 Fired when the `setOff` function provided by the render prop is invoked.
 
-**@params**: `Boolean` - Toggle state
+**params**: `Boolean` - Toggle state
 
 ### @onToggle
 
 Fired when the `toggle` function provided by the render prop is invoked.
 
-**@params**: `Boolean` - Toggle state
+**params**: `Boolean` - Toggle state
 
 ## Other Examples
 
@@ -62,6 +62,7 @@ Fired when the `toggle` function provided by the render prop is invoked.
 
 We can use `v-bind` object syntax to receive the `attrs` parameter from the render prop. The `attrs` object contains a `tabIndex` and `aria-expanded` property to give your toggle element better accessibility. It is recommended you always set this.
 
+```html
 <template>
   <div id="app">
     <banshee-toggle>
@@ -73,6 +74,7 @@ We can use `v-bind` object syntax to receive the `attrs` parameter from the rend
     </banshee-toggle>
   </div>
 </template>
+```
 
 ### Controlled
 
