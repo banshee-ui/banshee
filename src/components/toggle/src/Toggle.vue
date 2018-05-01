@@ -43,9 +43,7 @@ export default {
       return this.on !== undefined
     },
     toggler () {
-      return {
-        click: this.toggle
-      }
+      return { click: this.toggle }
     }
   },
   created () {
@@ -54,12 +52,18 @@ export default {
   methods: {
     setOn () {
       this.internalOn = true
+      this.onToggle(this.getOn)
+      this.$emit('setOn', this.getOn)
     },
     setOff () {
       this.internalOn = false
+      this.onToggle(this.getOn)
+      this.$emit('setOff', this.getOn)
     },
     toggle () {
       this.internalOn = !this.internalOn
+      this.onToggle(this.getOn)
+      this.$emit('onToggle', this.getOn)
     }
   },
   render (h) {
