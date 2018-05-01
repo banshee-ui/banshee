@@ -25,12 +25,15 @@ The initial "on" state. Defaults to `false`.
 ### on
 
 The Banshee toggle component will manage it's own state internally. If you need to control the component's state yourself set the `on` prop to `true` or `false` and control the toggle yourself through events or `on-toggle` prop.
+
 **type**: `Boolean`
 
 ### on-toggle
 
 Callback function fired when using `toggle` function provided by render prop. This function receives the current toggle state (`true`/`false`) as a parameter.
+
 **type**: `Function`
+
 **@params**: `Boolean` - Toggle state
 
 ## Events
@@ -38,16 +41,19 @@ Callback function fired when using `toggle` function provided by render prop. Th
 ### @setOn
 
 Fired when the `setOn` function provided by the render prop is invoked.
+
 **@params**: `Boolean` - Toggle state
 
 ### @setOff
 
 Fired when the `setOff` function provided by the render prop is invoked.
+
 **@params**: `Boolean` - Toggle state
 
 ### @onToggle
 
 Fired when the `toggle` function provided by the render prop is invoked.
+
 **@params**: `Boolean` - Toggle state
 
 ## Other Examples
