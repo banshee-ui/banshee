@@ -1,7 +1,19 @@
-import BansheeTabs from './src/Tabs'
+import Tabs from './src/Tabs'
+import Tab from './src/Tab'
+import TabPane from './src/TabPane'
 
-BansheeTabs.install = function (Vue) {
-  Vue.component(BansheeTabs.name, BansheeTabs)
+Tabs.install = function (Vue) {
+  Vue.component(Tabs.name, Tabs)
 }
 
-export default BansheeTabs
+Tab.install = function (Vue) {
+  Vue.component(Tab.name, Tab)
+}
+
+TabPane.install = function (Vue) {
+  Vue.component(TabPane.name, TabPane)
+}
+
+export const BansheeTabs = Tabs
+export const BansheeTab = Tab
+export const BansheeTabPane = TabPane
