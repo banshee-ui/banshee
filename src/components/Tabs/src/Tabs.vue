@@ -21,6 +21,12 @@ export default {
     activeTabPane () {
       return this.$slots[this.getSelected.toLowerCase()]
     },
+    attrs () {
+      return {
+        role: 'tab',
+        tabindex: '-1'
+      }
+    },
     getSelected () {
       return this.isControlled ? this.selected : this.internalSelected
     },
@@ -38,8 +44,13 @@ export default {
     }
   },
   render (h, context) {
-    return h('div', [
+    return h('div', {
+      attrs: {
+        'role': 'tablist'
+      }
+    }, [
       this.$scopedSlots.default({
+        attrs: { ...this.attrs },
         tabs: this.tabs,
         select: this.select,
         selected: this.getSelected
