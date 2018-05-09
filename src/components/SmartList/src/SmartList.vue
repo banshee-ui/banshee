@@ -59,12 +59,6 @@ export default {
     }
   },
   methods: {
-    addItem (item) {
-      this.$emit('add', this.items.push(item))
-    },
-    removeItem (item) {
-      this.$emit('remove', this.items.filter(x => x[this.itemKey] !== item[this.itemKey]))
-    },
     sortBy (by) {
       this.sort.by = by
       this.sort.order = this.sort.order * -1
@@ -73,7 +67,6 @@ export default {
   render () {
     return this.$scopedSlots.default({
       items: this.filteredItems,
-      remove: this.removeItem,
       sort: this.sortBy
     })
   }
