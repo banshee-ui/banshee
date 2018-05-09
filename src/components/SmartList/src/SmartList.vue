@@ -37,20 +37,22 @@ export default {
 
       if (this.query) {
         data = data.filter(row => {
-          return Object.keys(row).some(key => {
-            return (
-              String(row[key])
-                .toLowerCase()
-                .includes(this.query.toLowerCase())
-            )
-          })
+          if (typeof row === 'object') {
+            return Object.keys(row).some(key => {
+              return String(row[key]).toLowerCase().includes(this.query.toLowerCase())
+            })
+          }
+
+          return String(row).toLowerCase().includes(this.query.toLowerCase())
         })
       }
 
       if (this.sort.by) {
         data = data.slice().sort((a, b) => {
-          a = a[this.sort.by]
-          b = b[this.sort.by]
+          if (typeof a === 'object' && typeof b === 'object') {
+            a = a[this.sort.by]
+            b = b[this.sort.by]
+          }
           return (a === b ? 0 : a > b ? 1 : -1) * this.sort.order
         })
       }
