@@ -16,11 +16,21 @@ export default {
     sortMethod: {
       type: Function
     },
+    sortKey: {
+      type: String,
+      default: ''
+    },
     query: {
       type: String,
       default: ''
     }
   },
+  data: () => ({
+    sort: {
+      by: this.sortKey,
+      order: -1
+    }
+  }),
   computed: {
     filteredItems () {
       let data = this.items
@@ -37,6 +47,14 @@ export default {
         })
       }
 
+      if (this.sort.by) {
+        data = data.slice().sort((a, b) => {
+          a = a[this.sort.by]
+          b = b[this.sort.by]
+          return (a === b ? 0 : a > b ? 1 : -1) * this.sort.order
+        })
+      }
+
       return data
     }
   },
@@ -46,12 +64,17 @@ export default {
     },
     removeItem (item) {
       this.$emit('remove', this.items.filter(x => x[this.itemKey] !== item[this.itemKey]))
+    },
+    sortBy (by) {
+      this.sort.by = by
+      this.sort.order = this.sort.order * -1
     }
   },
   render () {
     return this.$scopedSlots.default({
       items: this.filteredItems,
-      remove: this.removeItem
+      remove: this.removeItem,
+      sort: this.sortBy
     })
   }
 }
