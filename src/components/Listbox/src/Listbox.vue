@@ -1,7 +1,4 @@
 <script>
-// focusedItem
-// aria-selected="true"
-
 export default {
   name: 'BansheeListbox',
   props: {
@@ -12,6 +9,14 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    selected: {
+      type: [Array, String, Number],
+      default: 0
+    },
+    withMultiSelect: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -23,6 +28,11 @@ export default {
     },
     currentItemDOM () {
       return this.$el.querySelectorAll('[role="option"]')[this.focusedIndex]
+    }
+  },
+  mounted () {
+    if (!Array.isArray(this.selected)) {
+      this.focusedIndex = parseInt(this.selected)
     }
   },
   methods: {
@@ -41,19 +51,20 @@ export default {
       }
     },
     down () {
-      this.focusedIndex = this.focusedIndex + 1
+      this.focusItem(this.focusedIndex + 1)
 
       if (this.focusedIndex > this.items.length - 1) {
-        this.focusedIndex = 0
+        this.focusItem(0)
       }
 
       this.scrollIntoView()
     },
     focusItem (index) {
       this.focusedIndex = index
+      this.$emit('onFocus', index)
     },
     scrollBottom () {
-      this.focusedIndex = this.items.length - 1
+      this.focusItem(this.items.length - 1)
       this.scrollIntoView()
     },
     scrollIntoView () {
@@ -62,14 +73,14 @@ export default {
       })
     },
     scrollTop () {
-      this.focusedIndex = 0
+      this.focusItem(0)
       this.scrollIntoView()
     },
     up () {
-      this.focusedIndex = this.focusedIndex - 1
+      this.focusItem(this.focusedIndex - 1)
 
       if (this.focusedIndex < 0) {
-        this.focusedIndex = this.items.length - 1
+        this.focusItem(this.items.length - 1)
       }
 
       this.scrollIntoView()
@@ -77,21 +88,19 @@ export default {
   },
   render () {
     return this.$scopedSlots.default({
+      aria: {
+        role: 'listbox',
+        tabindex: 0
+      },
       focused: {
         index: this.focusedIndex,
         item: this.currentItem
       },
       focusedIndex: this.focusedIndex,
       list: this.items,
-      listboxAria: {
-        role: 'listbox'
-      },
       onFocus: this.focusItem,
       onKeyboard: {
         keydown: this.handleEvent
-      },
-      optionsAria: {
-        role: 'option'
       }
     })
   }
