@@ -5,8 +5,10 @@ A renderless Vue UI component and utility framework.
 ## Planned Component List
 
 - Accordion
+- Audio / Video Players
 - Autocomplete
 - Button
+- Carousel
 - Calendar / Datepicker
 - Data Table
 - Drag & Drop
@@ -14,7 +16,7 @@ A renderless Vue UI component and utility framework.
 - Error Boundary
 - Fetch (API)
 - Form Fields (Input, Select, Checkbox/Radio, etc.)
-- Loading
+- Local & Session Storage
 - Media Query
 - Pagination
 - Portal
@@ -24,14 +26,8 @@ A renderless Vue UI component and utility framework.
 - Simple List
 - Step Wizard
 - Tabs
-- Tag Input
 - Tooltip
 - Toggle
 - Tree
 
-## Other Ideas
-
-- Audio / Video Players
-- Carousel
-- Image Filters (similar to Instagram)
-- Local & Session Storage 
+Reference for Web Accessibility [here](https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/#aria_ex).
