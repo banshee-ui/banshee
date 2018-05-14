@@ -1,34 +1,29 @@
 <script>
 export default {
   name: 'BansheeTab',
-  functional: true,
   props: {
-    active: {
-      type: String
+    disabled: {
+      type: Boolean,
+      default: false
     },
-    id: {
-      type: String
+    updateActiveIndex: {
+      type: Function
     },
-    tab: {
-      type: String,
-      required: true
+    tag: {
+      type: [String, Object],
+      default: 'div'
     }
   },
-  render (h, context) {
-    const { tab } = context.props
-    const active = context.props.active === context.props.tab
-
-    return context.data.scopedSlots.default({
-      active,
-      attrs: {
-        'aria-controls': `${tab}-tab`,
-        'aria-selected': String(active),
-        id: context.props.id || tab,
-        role: 'tab',
-        tabindex: '-1'
-      },
-      tab
-    })
+  render (h) {
+    return h(this.tag, {
+      on: {
+        click: () => {
+          if (!this.disabled) {
+            this.updateActiveIndex()
+          }
+        }
+      }
+    }, this.$slots.default)
   }
 }
 </script>
