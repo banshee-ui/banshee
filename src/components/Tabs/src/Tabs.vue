@@ -1,54 +1,53 @@
 <script>
+import BansheeTabPanes from './TabPanes'
+import BansheeTabList from './TabList'
+
 export default {
   name: 'BansheeTabs',
   props: {
-    defaultSelected: {
-      type: String
+    active: {
+      type: Number
     },
-    selected: {
-      type: String,
-      default: undefined
-    },
-    tabs: {
-      type: Array,
-      default: () => []
+    tag: {
+      type: [String, Object],
+      default: 'div'
     }
   },
   data: () => ({
-    internalSelected: ''
+    internalActive: 0
   }),
   computed: {
-    activeTabPane () {
-      return this.$slots[this.getSelected.toLowerCase()]
-    },
-    getSelected () {
-      return this.isControlled ? this.selected : this.internalSelected
-    },
-    isControlled () {
-      return this.selected !== undefined
+    getActiveIndex () {
+      return this.active >= 0 ? this.active : this.internalActive
     }
-  },
-  created () {
-    this.internalSelected = this.defaultSelected
   },
   methods: {
-    select (tab) {
-      this.internalSelected = tab
-      this.$emit('tabSelect', tab)
+    updateActiveIndex (index) {
+      const previous = this.internalActive
+      this.internalActive = index
+      this.$emit('updateActiveIndex', { index, previous })
     }
   },
-  render (h, context) {
-    return h('div', [
-      this.$scopedSlots.default({
-        attrs: {
-          role: 'tablist'
-        },
-        tabs: this.tabs,
-        select: this.select,
-        selected: this.getSelected
-      }),
-      this.activeTabPane
-    ])
+  render (h) {
+    const children = this.$slots.default.map(child => {
+      if (child.componentOptions && child.componentOptions.tag === 'BansheeTabPanes') {
+        return h(BansheeTabPanes, {
+          props: {
+            active: this.getActiveIndex
+          }
+        }, child.componentOptions.children)
+      } else if (child.componentOptions && child.componentOptions.tag === 'BansheeTabList') {
+        return h(BansheeTabList, {
+          props: {
+            updateActiveIndex: this.updateActiveIndex
+          }
+        }, child.componentOptions.children)
+      }
+
+      return child
+    })
+
+    return h(this.tag, children)
   }
 }
 </script>

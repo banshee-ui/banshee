@@ -1,6 +1,6 @@
 # Banshee
 
-A renderless Vue UI component and utility framework.
+A _mostly_ renderless Vue UI component and utility framework.
 
 ## Planned Component List
 
