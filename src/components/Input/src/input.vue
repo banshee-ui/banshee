@@ -19,7 +19,6 @@ export default {
   },
   computed: {
     listeners () {
-      console.log('listener', this.$listeners)
       return {
         ...this.$listeners,
         blur: e => this.$emit('blur', e.target.value),
