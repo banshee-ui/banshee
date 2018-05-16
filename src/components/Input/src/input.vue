@@ -1,7 +1,7 @@
 <template>
   <input :type="type"
-    :value="value"
-    v-on="listeners" />
+         :value="value"
+         v-on="listeners">
 </template>
 
 <script>
