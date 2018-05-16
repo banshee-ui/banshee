@@ -2,22 +2,21 @@
 export default {
   name: 'BansheeAccordionTitle',
   props: {
-    index: {
-      type: Number,
-      required: true
-    },
     tag: {
       type: String,
       default: 'div'
-    },
-    updateIndex: {
-      type: Function
+    }
+  },
+  inject: ['itemIndex', 'updateIndex'],
+  methods: {
+    update () {
+      this.updateIndex(this.itemIndex)
     }
   },
   render (h) {
     return h(this.tag, {
       on: {
-        click: this.updateIndex
+        click: this.update
       }
     }, this.$slots.default)
   }

@@ -19,7 +19,7 @@ export default {
   },
   provide () {
     return {
-      active: this.$data,
+      activeItems: this.$data,
       updateIndex: this.updateActiveIndex
     }
   },
@@ -54,7 +54,10 @@ export default {
   },
   render (h) {
     const scoped = this.$scopedSlots.default
-      ? this.$scopedSlots.default({ active: this.internalActive })
+      ? this.$scopedSlots.default({
+        active: this.internalActive,
+        update: this.updateActiveIndex
+      })
       : null
 
     const children = this.$slots.default.map((child, index) => {
