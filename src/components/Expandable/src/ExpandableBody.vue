@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'BansheeAccordionBody',
+  name: 'BansheeExpandableBody',
   props: {
     tag: {
       type: String,

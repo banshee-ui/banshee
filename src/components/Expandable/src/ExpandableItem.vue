@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'BansheeAccordionItem',
+  name: 'BansheeExpandableItem',
   props: {
     index: {
       type: Number

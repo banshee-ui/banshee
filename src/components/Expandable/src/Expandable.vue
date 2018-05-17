@@ -1,9 +1,9 @@
 <script>
-import BansheeAccordionItem from './AccordionItem'
+import BansheeExpandableItem from './ExpandableItem'
 import toPascal from '@/utils/hyphenToPascal'
 
 export default {
-  name: 'BansheeAccordion',
+  name: 'BansheeExpandable',
   props: {
     accordion: {
       type: Boolean,
@@ -63,8 +63,8 @@ export default {
     const children = this.$slots.default.map((child, index) => {
       const options = child.componentOptions
 
-      if (options && toPascal(options.tag) === BansheeAccordionItem.name) {
-        return h(BansheeAccordionItem, {
+      if (options && toPascal(options.tag) === BansheeExpandableItem.name) {
+        return h(BansheeExpandableItem, {
           props: {
             active: this.internalActive,
             index

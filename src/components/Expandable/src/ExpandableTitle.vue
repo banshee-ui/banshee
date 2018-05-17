@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'BansheeAccordionTitle',
+  name: 'BansheeExpandableTitle',
   props: {
     tag: {
       type: String,
