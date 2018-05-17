@@ -4,13 +4,17 @@ export default {
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'dd'
     }
   },
   inject: ['activeItems', 'itemIndex'],
   render (h) {
     return this.activeItems.internalActive.includes(this.itemIndex)
-      ? h(this.tag, this.$slots.default)
+      ? h(this.tag, {
+        attrs: {
+          role: 'region'
+        }
+      }, this.$slots.default)
       : null
   }
 }

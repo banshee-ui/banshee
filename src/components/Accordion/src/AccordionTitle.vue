@@ -4,10 +4,14 @@ export default {
   props: {
     tag: {
       type: String,
-      default: 'div'
+      default: 'dt'
     }
   },
-  inject: ['itemIndex', 'updateIndex'],
+  inject: [
+    'activeItems',
+    'itemIndex',
+    'updateIndex'
+  ],
   methods: {
     update () {
       this.updateIndex(this.itemIndex)
@@ -15,6 +19,9 @@ export default {
   },
   render (h) {
     return h(this.tag, {
+      attrs: {
+        'aria-expanded': this.activeItems.internalActive.includes(this.itemIndex)
+      },
       on: {
         click: this.update
       }

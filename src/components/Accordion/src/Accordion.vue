@@ -14,7 +14,7 @@ export default {
     },
     tag: {
       type: String,
-      default: 'div'
+      default: 'dl'
     }
   },
   provide () {
@@ -75,7 +75,11 @@ export default {
       return child
     })
 
-    return h(this.tag, [
+    return h(this.tag, {
+      attrs: {
+        role: 'presentation'
+      }
+    }, [
       children,
       scoped
     ])
