@@ -1,11 +1,10 @@
 <script>
+import BansheeListboxItem from './ListboxItem'
+import toPascal from '@/utils/hyphenToPascal'
+
 export default {
   name: 'BansheeListbox',
   props: {
-    dev: {
-      type: Boolean,
-      default: false
-    },
     items: {
       type: Array,
       required: true
@@ -14,13 +13,22 @@ export default {
       type: [Array, String, Number],
       default: 0
     },
+    tag: {
+      type: String,
+      default: 'div'
+    },
+    transfer: {
+      type: Boolean,
+      default: false
+    },
     withMultiSelect: {
       type: Boolean,
       default: false
     }
   },
   data: () => ({
-    focusedIndex: 0
+    focusedIndex: 0,
+    internalSelected: []
   }),
   computed: {
     currentItem () {
@@ -38,6 +46,8 @@ export default {
   methods: {
     handleEvent ({ keyCode }) {
       switch (keyCode) {
+        case 13: /** Enter key */
+          return this.selectItem()
         case 35: /** End key */
           return this.scrollBottom()
         case 36: /** Home key */
@@ -46,8 +56,6 @@ export default {
           return this.up()
         case 40: /** Down arrow */
           return this.down()
-        default:
-          if (this.dev) console.warn(`No case for key code: ${keyCode}`)
       }
     },
     down () {
@@ -62,6 +70,16 @@ export default {
     focusItem (index) {
       this.focusedIndex = index
       this.$emit('onFocus', index)
+    },
+    selectItem () {
+      if (!this.internalSelected.includes(this.currentItem)) {
+        this.internalSelected.push(this.currentItem)
+
+        this.$emit('selectItem', {
+          item: this.currentItem,
+          selected: this.internalSelected
+        })
+      }
     },
     scrollBottom () {
       this.focusItem(this.items.length - 1)
@@ -86,23 +104,38 @@ export default {
       this.scrollIntoView()
     }
   },
-  render () {
-    return this.$scopedSlots.default({
-      aria: {
+  render (h) {
+    const children = this.items.map((item, index) => {
+      for (let i = 0; i < this.$slots.default.length; i++) {
+        const child = this.$slots.default[i]
+        const options = child.componentOptions
+        if (options && toPascal(options.tag) === BansheeListboxItem.name) {
+          const childCopy = Object.assign({}, child)
+          childCopy.componentOptions.propsData = { item, index }
+
+          return h(BansheeListboxItem, {
+            props: {
+              item,
+              index,
+              focus: this.focusItem,
+              focused: this.focusedIndex,
+              selectItem: this.selectItem
+            },
+            ...childCopy.data
+          })
+        }
+      }
+    })
+
+    return h(this.tag, {
+      attrs: {
         role: 'listbox',
         tabindex: 0
       },
-      focused: {
-        index: this.focusedIndex,
-        item: this.currentItem
-      },
-      focusedIndex: this.focusedIndex,
-      list: this.items,
-      onFocus: this.focusItem,
-      onKeyboard: {
+      on: {
         keydown: this.handleEvent
       }
-    })
+    }, children)
   }
 }
 </script>

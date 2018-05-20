@@ -1,25 +1,47 @@
 <script>
 export default {
   name: 'BansheeListboxItem',
-  functional: true,
   props: {
-    itemIndex: {
+    focus: {
+      type: Function,
+      required: true
+    },
+    focused: {
       type: Number,
       required: true
     },
-    selected: {
-      type: [Array, String, Number],
+    index: {
+      type: Number,
       required: true
+    },
+    item: {
+      type: [String, Number, Object],
+      required: true
+    },
+    selectItem: {
+      type: Function
+    },
+    tag: {
+      type: String,
+      default: 'div'
     }
   },
-  render (h, context) {
-    return context.data.scopedSlots.default({
-      active: context.props.selected === context.props.itemIndex,
-      aria: {
+  render (h) {
+    return h(this.tag, {
+      attrs: {
         role: 'option',
-        'aria-selected': context.props.selected === context.props.itemIndex
+        'aria-selected': this.focused === this.index
+      },
+      on: {
+        click: () => {
+          this.focus(this.index)
+        }
       }
-    })
+    }, this.$scopedSlots.default({
+      item: this.item,
+      index: this.index,
+      selected: this.focused === this.index
+    }))
   }
 }
 </script>

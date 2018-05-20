@@ -3,24 +3,12 @@
 ## Basic Usage
 
 ```html
-<banshee-listbox :items="items">
-  <div  slot-scope="{ list, onKeyboard, onFocus, focused, focusedIndex, optionsAria }">
-    <strong>Currently Selected: {{ focused.item }}</strong>
-    <ul tabindex="0"
-      role="listbox"
-      class="listbox"
-      v-on="onKeyboard">
-      <li v-for="(character, i) in list"
-        :class="{ active: i === focusedIndex }"
-        class="listbox-item"
-        v-bind="optionsAria"
-        :aria-selected="i === focusedIndex"
-        @click="onFocus(i)"
-        :key="character">
-        {{ character }}
-      </li>
-    </ul>
-  </div>
+<banshee-listbox :items="characters">
+  <banshee-listbox-item>
+    <template slot-scope="{ item, index, selected }">
+      <span :class="{ active: selected }" >{{ index }} : {{ item }}</span>
+    </template>
+  </banshee-listbox-item>
 </banshee-listbox>
 
 <script>
