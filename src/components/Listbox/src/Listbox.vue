@@ -105,14 +105,11 @@ export default {
     }
   },
   render (h) {
-    const children = this.items.map((item, index) => {
-      for (let i = 0; i < this.$slots.default.length; i++) {
-        const child = this.$slots.default[i]
-        const options = child.componentOptions
-        if (options && toPascal(options.tag) === BansheeListboxItem.name) {
-          const childCopy = Object.assign({}, child)
-          childCopy.componentOptions.propsData = { item, index }
+    const children = this.$slots.default.map(child => {
+      const options = child.componentOptions
 
+      if (options && toPascal(options.tag) === BansheeListboxItem.name) {
+        return this.items.map((item, index) => {
           return h(BansheeListboxItem, {
             props: {
               item,
@@ -121,10 +118,12 @@ export default {
               focused: this.focusedIndex,
               selectItem: this.selectItem
             },
-            ...childCopy.data
+            ...child.data
           })
-        }
+        })
       }
+
+      return child
     })
 
     return h(this.tag, {
