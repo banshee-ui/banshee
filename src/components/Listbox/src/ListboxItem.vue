@@ -18,8 +18,13 @@ export default {
       type: [String, Number, Object],
       required: true
     },
+    selected: {
+      type: Array,
+      required: true
+    },
     selectItem: {
-      type: Function
+      type: Function,
+      required: true
     },
     tag: {
       type: String,
@@ -38,9 +43,10 @@ export default {
         }
       }
     }, this.$scopedSlots.default({
+      active: this.focused === this.index,
       item: this.item,
       index: this.index,
-      selected: this.focused === this.index
+      selected: this.selected.includes(this.item)
     }))
   }
 }

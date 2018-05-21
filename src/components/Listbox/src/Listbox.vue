@@ -9,26 +9,22 @@ export default {
       type: Array,
       required: true
     },
-    selected: {
+    itemKey: {
+      type: String,
+      default: 'id'
+    },
+    select: {
       type: [Array, String, Number],
       default: 0
     },
     tag: {
       type: String,
       default: 'div'
-    },
-    transfer: {
-      type: Boolean,
-      default: false
-    },
-    withMultiSelect: {
-      type: Boolean,
-      default: false
     }
   },
   data: () => ({
     focusedIndex: 0,
-    internalSelected: []
+    selected: []
   }),
   computed: {
     currentItem () {
@@ -39,11 +35,20 @@ export default {
     }
   },
   mounted () {
-    if (!Array.isArray(this.selected)) {
-      this.focusedIndex = parseInt(this.selected)
+    if (!Array.isArray(this.select)) {
+      this.focusedIndex = parseInt(this.select)
     }
   },
   methods: {
+    _removeFromSelected () {
+      const index = this.selected.indexOf(this.currentItem)
+      this.selected = this.selected.filter((x, i) => i !== index)
+
+      this.$emit('removeItem', {
+        removed: this.currentItem,
+        selected: this.selected
+      })
+    },
     handleEvent ({ keyCode }) {
       switch (keyCode) {
         case 13: /** Enter key */
@@ -72,13 +77,15 @@ export default {
       this.$emit('onFocus', index)
     },
     selectItem () {
-      if (!this.internalSelected.includes(this.currentItem)) {
-        this.internalSelected.push(this.currentItem)
+      if (!this.selected.includes(this.currentItem)) {
+        this.selected.push(this.currentItem)
 
         this.$emit('selectItem', {
           item: this.currentItem,
-          selected: this.internalSelected
+          selected: this.selected
         })
+      } else {
+        this._removeFromSelected()
       }
     },
     scrollBottom () {
@@ -93,6 +100,14 @@ export default {
     scrollTop () {
       this.focusItem(0)
       this.scrollIntoView()
+    },
+    transfer () {
+      this.$emit('transfer', {
+        selected: this.selected
+      })
+
+      this.$el.focus()
+      this.selected = []
     },
     up () {
       this.focusItem(this.focusedIndex - 1)
@@ -110,14 +125,25 @@ export default {
 
       if (options && toPascal(options.tag) === BansheeListboxItem.name) {
         return this.items.map((item, index) => {
+          let key
+
+          // If item is not an object
+          if (!item[this.itemKey]) {
+            key = `${item}-${index}`
+          } else {
+            key = item[this.itemKey]
+          }
+
           return h(BansheeListboxItem, {
             props: {
               item,
               index,
               focus: this.focusItem,
               focused: this.focusedIndex,
+              selected: this.selected,
               selectItem: this.selectItem
             },
+            key,
             ...child.data
           })
         })
@@ -125,6 +151,17 @@ export default {
 
       return child
     })
+
+    const scopedSlot = this.$scopedSlots.default
+      ? this.$scopedSlots.default({
+        items: this.items,
+        focus: this.focusItem,
+        focused: this.focusedIndex,
+        selectItem: this.selectItem,
+        selectedItems: this.selected,
+        transfer: this.transfer
+      })
+      : null
 
     return h(this.tag, {
       attrs: {
@@ -134,7 +171,7 @@ export default {
       on: {
         keydown: this.handleEvent
       }
-    }, children)
+    }, [children, scopedSlot])
   }
 }
 </script>
