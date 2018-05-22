@@ -58,7 +58,7 @@ export default {
       const index = this.selected.indexOf(this.currentItem)
       this.selected = this.selected.filter((x, i) => i !== index)
 
-      this.$emit('removeItem', {
+      this.$emit('onRemoveItem', {
         removed: this.currentItem,
         selected: this.selected
       })
@@ -94,7 +94,7 @@ export default {
       if (!this.selected.includes(this.currentItem)) {
         this.selected.push(this.currentItem)
 
-        this.$emit('selectItem', {
+        this.$emit('onSelectItem', {
           item: this.currentItem,
           selected: this.selected
         })
@@ -116,7 +116,7 @@ export default {
       this.scrollIntoView()
     },
     transfer () {
-      this.$emit('transfer', {
+      this.$emit('onTransfer', {
         selected: this.selected
       })
 
