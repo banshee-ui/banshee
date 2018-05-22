@@ -169,6 +169,7 @@ export default {
         tabindex: 0
       },
       on: {
+        dblclick: this.selectItem,
         keydown: this.handleEvent
       }
     }, [children, scopedSlot])
