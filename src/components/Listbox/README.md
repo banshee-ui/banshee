@@ -5,8 +5,8 @@
 ```html
 <banshee-listbox :items="characters">
   <banshee-listbox-item>
-    <template slot-scope="{ item, index, selected }">
-      <span :class="{ active: selected }" >{{ index }} : {{ item }}</span>
+    <template slot-scope="{ active, item }">
+      <span :class="{ active }">{{ item }}</span>
     </template>
   </banshee-listbox-item>
 </banshee-listbox>
@@ -32,7 +32,7 @@
 ```html
 <template>
   <div id="app">
-    <banshee-listbox @transfer="transfer" :items="characters">
+    <banshee-listbox @onTransfer="transfer" :items="characters">
       <banshee-listbox-item>
         <template slot-scope="{ active, item, selected }">
           <template v-if="selected">&#10004;</template> <span :class="{ active }">{{ item }}</span>
