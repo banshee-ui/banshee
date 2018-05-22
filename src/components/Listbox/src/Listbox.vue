@@ -5,6 +5,14 @@ import toPascal from '@/utils/hyphenToPascal'
 export default {
   name: 'BansheeListbox',
   props: {
+    defaultFocus: {
+      type: [String, Number],
+      default: 0
+    },
+    defaultSelected: {
+      type: [Array, String, Number],
+      default: 0
+    },
     items: {
       type: Array,
       required: true
@@ -12,10 +20,6 @@ export default {
     itemKey: {
       type: String,
       default: 'id'
-    },
-    select: {
-      type: [Array, String, Number],
-      default: 0
     },
     tag: {
       type: String,
@@ -35,16 +39,26 @@ export default {
     }
   },
   mounted () {
-    if (!Array.isArray(this.select)) {
-      this.focusedIndex = parseInt(this.select)
+    if (this.defaultFocus) {
+      this.focusedIndex = parseInt(this.defaultFocus)
     }
+
+    this._handleDefaultSelected()
   },
   methods: {
+    _handleDefaultSelected () {
+      if (!Array.isArray(this.defaultSelected)) {
+        const index = parseInt(this.defaultSelected)
+        this.selected.push(this.items[index])
+      } else {
+        this.selected = this.defaultSelected.map(i => this.items[i])
+      }
+    },
     _removeFromSelected () {
       const index = this.selected.indexOf(this.currentItem)
       this.selected = this.selected.filter((x, i) => i !== index)
 
-      this.$emit('removeItem', {
+      this.$emit('onRemoveItem', {
         removed: this.currentItem,
         selected: this.selected
       })
@@ -80,7 +94,7 @@ export default {
       if (!this.selected.includes(this.currentItem)) {
         this.selected.push(this.currentItem)
 
-        this.$emit('selectItem', {
+        this.$emit('onSelectItem', {
           item: this.currentItem,
           selected: this.selected
         })
@@ -102,7 +116,7 @@ export default {
       this.scrollIntoView()
     },
     transfer () {
-      this.$emit('transfer', {
+      this.$emit('onTransfer', {
         selected: this.selected
       })
 
