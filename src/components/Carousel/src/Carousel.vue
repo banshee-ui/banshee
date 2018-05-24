@@ -58,6 +58,7 @@ export default {
     const scopedSlots = this.$scopedSlots.default
       ? this.$scopedSlots.default({
         active: this.currentIndex,
+        length: this.carouselLength,
         next: this.nextSlide,
         previous: this.previousSlide
       })
