@@ -1,8 +1,15 @@
 <script>
+import BansheeCarouselSlide from './CarouselSlide'
+import toPascal from '@/utils/hyphenToPascal'
+
 export default {
   name: 'BansheeCarousel',
   props: {
     autoplay: {
+      type: Boolean,
+      default: false
+    },
+    pauseOnHover: {
       type: Boolean,
       default: false
     },
@@ -21,7 +28,17 @@ export default {
     },
     tag: {
       type: String,
-      default: 'div'
+      default: 'ul'
+    },
+    transitionAppear: {
+      type: Boolean,
+      default: false
+    },
+    transitionName: {
+      type: String
+    },
+    transitionMode: {
+      type: String
     }
   },
   data: () => ({
@@ -31,43 +48,62 @@ export default {
     this.currentIndex = this.startSlide
   },
   computed: {
-    carouselLength () {
-      return this.$slots.default.length
+    activeSlide () {
+      return this.carouselSlides[this.currentIndex]
+    },
+    carouselSlides () {
+      return this.$slots.default.filter(child => {
+        const options = child.componentOptions
+        if (options && toPascal(BansheeCarouselSlide.name)) {
+          return child
+        }
+      })
+    },
+    length () {
+      return this.carouselSlides.length
+    },
+    otherCarouselContent () {
+      return this.$slots.default.filter(child => !child.componentOptions ? child : null)
     }
   },
   methods: {
     nextSlide () {
-      if (this.currentIndex >= this.carouselLength - 1) {
-        this.currentIndex = 0
-        return
-      }
-
       this.currentIndex += 1
+
+      if (this.currentIndex > this.length - 1) {
+        this.currentIndex = 0
+      }
     },
     previousSlide () {
-      if (this.currentIndex <= 0) {
-        this.currentIndex = this.carouselLength - 1
-        return
-      }
-
       this.currentIndex -= 1
+
+      if (this.currentIndex < 0) {
+        this.currentIndex = this.length - 1
+      }
     }
   },
   render (h) {
-    const activeSlide = this.$slots.default[this.currentIndex]
     const scopedSlots = this.$scopedSlots.default
       ? this.$scopedSlots.default({
-        active: this.currentIndex,
-        length: this.carouselLength,
+        activeIndex: this.currentIndex,
+        length: this.length,
         next: this.nextSlide,
         previous: this.previousSlide
       })
       : null
 
-    return h(this.tag, [
-      activeSlide,
-      scopedSlots
-    ])
+    const slide = h('transition', {
+      props: {
+        name: this.transitionName,
+        mode: this.transitionMode
+      }
+    }, [this.activeSlide])
+
+    return h(this.tag, {
+      attrs: {
+        tabindex: 0
+      }
+    }, [slide, this.otherCarouselContent, scopedSlots])
   }
 }
 </script>

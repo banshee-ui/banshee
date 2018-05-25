@@ -20,15 +20,12 @@
 With a transition:
 
 ```html
-<banshee-carousel>
-  <template v-for="slide in slides">
-    <transition name="fade" mode="out-in" :key="slide.id">
-      <banshee-carousel-slide :key="slide.id">
-          <img :src="slide.src">
-      </banshee-carousel-slide>
-    </transition>
-  </template>
-
+<banshee-carousel transition-name="fade" 
+                  transition-mode="out-in">
+  <banshee-carousel-slide v-for="slide in slides" :key="slide.id">
+    <img :src="slide.src">
+  </banshee-carousel-slide>
+  
   <template slot-scope="{ next, previous }">
     <button @click="next">Next</button>
     <button @click="previous">Prev</button>
