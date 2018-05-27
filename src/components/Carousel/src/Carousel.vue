@@ -9,6 +9,10 @@ export default {
       type: Boolean,
       default: false
     },
+    id: {
+      type: String,
+      default: null
+    },
     pauseOnHover: {
       type: Boolean,
       default: false
@@ -86,6 +90,24 @@ export default {
     const scopedSlots = this.$scopedSlots.default
       ? this.$scopedSlots.default({
         activeIndex: this.currentIndex,
+        btnAttrs: {
+          buttons: {
+            'aria-label': 'Carousel Buttons',
+            'aria-controls': this.id
+          },
+          next: {
+            'aria-label': 'next'
+          },
+          pause: {
+            'aria-label': 'pause'
+          },
+          play: {
+            'aria-label': 'play'
+          },
+          previous: {
+            'aria-label': 'previous'
+          }
+        },
         length: this.length,
         next: this.nextSlide,
         previous: this.previousSlide
@@ -101,6 +123,8 @@ export default {
 
     return h(this.tag, {
       attrs: {
+        'aria-live': 'polite',
+        id: this.id,
         tabindex: 0
       }
     }, [slide, this.otherCarouselContent, scopedSlots])
