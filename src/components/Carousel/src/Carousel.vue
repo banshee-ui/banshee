@@ -24,7 +24,7 @@ export default {
     },
     speed: {
       type: [String, Number],
-      default: 3000
+      default: 5000
     },
     startSlide: {
       type: [String, Number],
@@ -46,10 +46,20 @@ export default {
     }
   },
   data: () => ({
+    autoplayTime: null,
     currentIndex: 0
   }),
   mounted () {
     this.currentIndex = this.startSlide
+
+    if (this.autoplay) {
+      this.play()
+    }
+
+    if (this.pauseOnHover) {
+      this.$el.addEventListener('mouseenter', this.pause)
+      this.$el.addEventListener('mouseleave', this.play)
+    }
   },
   computed: {
     activeSlide () {
@@ -77,6 +87,12 @@ export default {
       if (this.currentIndex > this.length - 1) {
         this.currentIndex = 0
       }
+    },
+    pause () {
+      this.autoplayTime = clearInterval(this.autoplayTime)
+    },
+    play () {
+      this.autoplayTime = setInterval(this.nextSlide, this.speed)
     },
     previousSlide () {
       this.currentIndex -= 1
@@ -110,6 +126,8 @@ export default {
         },
         length: this.length,
         next: this.nextSlide,
+        pause: this.pause,
+        play: this.play,
         previous: this.previousSlide
       })
       : null
