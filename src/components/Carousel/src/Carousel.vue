@@ -17,18 +17,14 @@ export default {
       type: Boolean,
       default: false
     },
-    show: {
-      type: [String, Number],
-      default: 1,
-      validator: value => value > 0
-    },
     speed: {
       type: [String, Number],
       default: 5000
     },
     startSlide: {
       type: [String, Number],
-      default: 0
+      default: 0,
+      validator: value => value >= 0
     },
     tag: {
       type: String,
@@ -87,12 +83,16 @@ export default {
       if (this.currentIndex > this.length - 1) {
         this.currentIndex = 0
       }
+
+      this.$emit('onChange', this.currentIndex)
     },
     pause () {
       this.autoplayTime = clearInterval(this.autoplayTime)
+      this.$emit('onChange', this.currentIndex)
     },
     play () {
       this.autoplayTime = setInterval(this.nextSlide, this.speed)
+      this.$emit('onChange', this.currentIndex)
     },
     previousSlide () {
       this.currentIndex -= 1
@@ -100,6 +100,8 @@ export default {
       if (this.currentIndex < 0) {
         this.currentIndex = this.length - 1
       }
+
+      this.$emit('onChange', this.currentIndex)
     }
   },
   render (h) {
