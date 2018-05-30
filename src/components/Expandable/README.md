@@ -1,6 +1,8 @@
 # Banshee Expandable
 
-Should this have similar API to Tabs?
+Toggle the visibility of content within Banshee expandables.
+
+## Basic Usage
 
 ```html
 <banshee-expandable>
@@ -20,7 +22,16 @@ Should this have similar API to Tabs?
 </banshee-expandable>
 ```
 
-We can wrap other HTML/Components on our `<banshee-expandable-body>`
+To create some expandable content within your application you utilize a few tags:
+
+- `<banshee-expandable>` - designates area of app that will hold expandable content
+- `<banshee-expandable-item>` - each individual expandable content area
+- `<banshee-expandable-title>` - the title of the content area and the portion of the expandable that is always showing
+- `<banshee-expandable-body>` - the hidden content of the expandable that is shown once an item has been expanded
+
+**The only requirement is that a `<banshee-expandable-item>` is a direct child of `<banshee-expandable>`.**
+
+It is fair game to wrap other HTML/Components on our `<banshee-expandable-body>` as shown below.
 
 ```html
 <banshee-expandable>
@@ -48,3 +59,15 @@ We can wrap other HTML/Components on our `<banshee-expandable-body>`
   </banshee-expandable-item>
 </banshee-expandable>
 ```
+
+## Components
+
+### Expandable
+
+Designates area of app that will hold expandable content
+
+### Expandable Item
+
+### Expandable Title
+
+### Expandable Body
