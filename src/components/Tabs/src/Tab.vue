@@ -6,7 +6,7 @@ export default {
       type: Boolean,
       default: false
     },
-    updateActiveIndex: {
+    updateIndex: {
       type: Function
     },
     tag: {
@@ -19,7 +19,7 @@ export default {
       on: {
         click: () => {
           if (!this.disabled) {
-            this.updateActiveIndex()
+            this.updateIndex()
           }
         }
       }

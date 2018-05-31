@@ -1,23 +1,23 @@
 <script>
 import BansheeTab from './Tab'
+import toPascal from '@/utils/hyphenToPascal'
 
 export default {
   name: 'BansheeTabList',
   props: {
-    updateActiveIndex: {
-      type: Function
-    },
     tag: {
       type: [String, Object],
       default: 'div'
     }
   },
+  inject: ['updateIndex'],
   render (h) {
     const children = this.$slots.default.map((child, index) => {
-      if (child.componentOptions && child.componentOptions.tag === 'BansheeTab') {
+      const options = child.componentOptions
+      if (options && toPascal(options.tag) === 'BansheeTab') {
         const data = Object.assign({}, {
-          updateActiveIndex: () => {
-            this.updateActiveIndex(index)
+          updateIndex: () => {
+            this.updateIndex(index)
           }
         }, child.componentOptions.propsData)
 

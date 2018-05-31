@@ -2,17 +2,15 @@
 export default {
   name: 'BansheeTabPanes',
   props: {
-    active: {
-      type: Number
-    },
     tag: {
       type: [String, Object],
       default: 'div'
     }
   },
+  inject: ['tabs'],
   render (h) {
     return h(this.tag, [
-      this.$slots.default[this.active]
+      this.$slots.default[this.tabs.getActiveIndex]
     ])
   }
 }

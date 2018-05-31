@@ -1,7 +1,4 @@
 <script>
-import BansheeTabPanes from './TabPanes'
-import BansheeTabList from './TabList'
-
 export default {
   name: 'BansheeTabs',
   props: {
@@ -11,6 +8,12 @@ export default {
     tag: {
       type: [String, Object],
       default: 'div'
+    }
+  },
+  provide () {
+    return {
+      tabs: this,
+      updateIndex: this.updateActiveIndex
     }
   },
   data: () => ({
@@ -29,25 +32,7 @@ export default {
     }
   },
   render (h) {
-    const children = this.$slots.default.map(child => {
-      if (child.componentOptions && child.componentOptions.tag === 'BansheeTabPanes') {
-        return h(BansheeTabPanes, {
-          props: {
-            active: this.getActiveIndex
-          }
-        }, child.componentOptions.children)
-      } else if (child.componentOptions && child.componentOptions.tag === 'BansheeTabList') {
-        return h(BansheeTabList, {
-          props: {
-            updateActiveIndex: this.updateActiveIndex
-          }
-        }, child.componentOptions.children)
-      }
-
-      return child
-    })
-
-    return h(this.tag, children)
+    return h(this.tag, this.$slots.default)
   }
 }
 </script>
