@@ -6,10 +6,6 @@ export default {
     items: {
       type: Array,
       required: true
-    },
-    itemKey: {
-      type: String,
-      default: 'id'
     }
   },
   render (h, { props, data }) {
