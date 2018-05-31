@@ -9,7 +9,12 @@ export default {
   },
   inject: ['tabs'],
   render (h) {
-    return h(this.tag, [
+    return h(this.tag, {
+      attrs: {
+        role: 'tabpanel',
+        tabindex: 0
+      }
+    }, [
       this.$slots.default[this.tabs.getActiveIndex]
     ])
   }

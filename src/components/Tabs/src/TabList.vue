@@ -16,6 +16,7 @@ export default {
       const options = child.componentOptions
       if (options && toPascal(options.tag) === 'BansheeTab') {
         const data = Object.assign({}, {
+          index,
           updateIndex: () => {
             this.updateIndex(index)
           }
@@ -31,7 +32,11 @@ export default {
       return child
     })
 
-    return h(this.tag, children)
+    return h(this.tag, {
+      attrs: {
+        role: 'tablist'
+      }
+    }, children)
   }
 }
 </script>

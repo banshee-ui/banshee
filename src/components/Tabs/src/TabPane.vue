@@ -1,14 +1,9 @@
 <script>
 export default {
   name: 'BansheeTabPane',
-  props: {
-    tag: {
-      type: [String, Object],
-      default: 'div'
-    }
-  },
-  render (h) {
-    return h(this.tag, this.$slots.default)
+  functional: true,
+  render (h, { slots }) {
+    return slots().default
   }
 }
 </script>
