@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" src="logo.png">
+  <img width="350" height="350" src="logo.png">
 </p>
 
 <h1 align="center">Banshee</h1>
