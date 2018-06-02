@@ -1,40 +1,22 @@
-# Banshee
+<p align="center">
+  <img width="200" src="logo.svg">
+</p>
 
-A _mostly_ renderless Vue UI component and utility framework.
+<h1 align="center">Banshee</h1>
 
-## Planned Component List
+<p align="center">
+  A mostly renderless Vue UI component and utility library.
+</p>
 
-- Accordion
-- Audio / Video Players
-- Autocomplete
-- Button
-- Carousel
-- Calendar / Datepicker
-- Data Table
-- Drag & Drop
-- Dropdown
-- Error Boundary
-- Fetch (API)
-- Form Fields (Input, Select, Checkbox/Radio, etc.)
-- Local & Session Storage
-- Media Query
-- Pagination
-- Portal
-- Slider
-- Smart List
-- Side Drawer
-- Simple List
-- Step Wizard
-- Tabs
-- Tooltip
-- Toggle
-- Tree
+---
 
-Reference for Web Accessibility [here](https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/#aria_ex).
+## Introduction
 
+Banshee is a component library for Vue which seeks to only provide the JavaScript functionality and leaves the HTML markup and styling to you.  It ships with no CSS and minimal to no HTML in all components.
 
-## Ideas / Future
+Banshee allows you to focus on building custom applications the way you want them to look without having to conform to another library's design specs.  Gain complete control on how you build Vue applications.
 
-- Add/Refactor to compound components... API is already getting a little cumbersome with all the options to pass to your components, we should just handle that for the user (ie aria stuff shouldn't be "opt-in" via v-bind="attrs", they shouldn't have to think about it)
-- Start writing unit tests you idiot..
-- Add comments
+## Installation
+
+_Beta coming soon._
+
