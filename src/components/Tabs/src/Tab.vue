@@ -18,14 +18,25 @@ export default {
     }
   },
   inject: ['tabs'],
-  computed: {
-
-  },
   render (h) {
+    let children
+    const isScoped = this.$scopedSlots.default
+    const isActive = this.index === this.tabs.getActiveIndex
+
+    if (isScoped) {
+      children = this.$scopedSlots.default({
+        index: this.index,
+        updateIndex: this.updateIndex
+      })
+    } else {
+      children = this.$slots.default
+    }
+
     return h(this.tag, {
       attrs: {
         role: 'tab',
-        'aria-selected': String(this.index === this.tabs.getActiveIndex)
+        tabindex: isActive ? 0 : -1,
+        'aria-selected': String(isActive)
       },
       on: {
         click: () => {
@@ -34,7 +45,7 @@ export default {
           }
         }
       }
-    }, this.$slots.default)
+    }, children)
   }
 }
 </script>

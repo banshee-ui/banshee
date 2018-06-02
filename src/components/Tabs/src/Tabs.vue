@@ -5,6 +5,10 @@ export default {
     active: {
       type: Number
     },
+    defaultActive: {
+      type: Number,
+      default: 0
+    },
     tag: {
       type: [String, Object],
       default: 'div'
@@ -24,6 +28,9 @@ export default {
       return this.active >= 0 ? this.active : this.internalActive
     }
   },
+  mounted () {
+    this.internalActive = this.defaultActive
+  },
   methods: {
     updateActiveIndex (index) {
       const previous = this.internalActive
@@ -32,7 +39,18 @@ export default {
     }
   },
   render (h) {
-    return h(this.tag, this.$slots.default)
+    let children
+    const isScoped = this.$scopedSlots.default
+
+    if (isScoped) {
+      children = this.$scopedSlots.default({
+        active: this.getActiveIndex
+      })
+    } else {
+      children = this.$slots.default
+    }
+
+    return h(this.tag, children)
   }
 }
 </script>

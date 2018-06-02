@@ -15,18 +15,21 @@ export default {
     const children = this.$slots.default.map((child, index) => {
       const options = child.componentOptions
       if (options && toPascal(options.tag) === 'BansheeTab') {
-        const data = Object.assign({}, {
+        const props = {
           index,
+          vertical: this.vertical,
           updateIndex: () => {
             this.updateIndex(index)
-          }
-        }, child.componentOptions.propsData)
+          },
+          ...options.propsData
+        }
 
         return h(BansheeTab, {
+          ...child.data,
           props: {
-            ...data
+            ...props
           }
-        }, child.componentOptions.children)
+        }, options.children)
       }
 
       return child
