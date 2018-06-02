@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" src="logo.svg">
+  <img width="200" src="logo.png">
 </p>
 
 <h1 align="center">Banshee</h1>
