@@ -35,7 +35,7 @@ export default {
     updateActiveIndex (index) {
       const previous = this.internalActive
       this.internalActive = index
-      this.$emit('updateActiveIndex', { index, previous })
+      this.$emit('onTabChange', { index, previous })
     }
   },
   render (h) {
@@ -44,7 +44,8 @@ export default {
 
     if (isScoped) {
       children = this.$scopedSlots.default({
-        active: this.getActiveIndex
+        active: this.getActiveIndex,
+        updateActiveIndex: this.updateActiveIndex
       })
     } else {
       children = this.$slots.default

@@ -26,7 +26,7 @@ export default {
     if (isScoped) {
       children = this.$scopedSlots.default({
         index: this.index,
-        updateIndex: this.updateIndex
+        updateActiveIndex: this.updateIndex
       })
     } else {
       children = this.$slots.default
