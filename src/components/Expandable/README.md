@@ -25,7 +25,7 @@ Toggle the visibility of content within Banshee expandables.
 To create some expandable content within your application you utilize a few tags:
 
 - `<banshee-expandable>` - designates area of app that will hold expandable content
-- `<banshee-expandable-item>` - each individual expandable content area
+- `<banshee-expandable-item>` - each individual expandable area
 - `<banshee-expandable-title>` - the title of the content area and the portion of the expandable that is always showing
 - `<banshee-expandable-body>` - the hidden content of the expandable that is shown once an item has been expanded
 
@@ -60,14 +60,57 @@ It is fair game to wrap other HTML/Components on our `<banshee-expandable-body>`
 </banshee-expandable>
 ```
 
-## Components
+## Expandable
 
-### Expandable
+Designates area of app that will hold expandable content.
 
-Designates area of app that will hold expandable content
+### Attributes & Props
 
-### Expandable Item
+| Name | Required | Type | Default | Description |
+| ---  | ---      | ---  | ---     | ---         |
+| accordion | `false` | Boolean | `false` | designates the expandables as accordions, allowing only one to be open at a time |
+| active | `false` | [Array, Number] | N/A | control prop, control which expandable-items are open |
+| tag | `false` | String | `'div'` | HTML tag for wrapping expandable element |
 
-### Expandable Title
+### Events
 
-### Expandable Body
+| Event | Parameters | Description |
+| ---   | ---        | ---         |
+| onOpen | (activeIndexes: Array) | the currently active indexes |
+
+### Scoped Slots
+
+| Property | Description |
+| ---      | ---         |
+| active   | the active index(es) |
+| update   | method which takes an index or array of indexes to update the current set of active indexes |  
+
+## Expandable Item
+
+Designates an area as an expandable section. Must be a direct child of the `<banshee-expandable>` component.
+
+### Attributes & Props
+
+| Name | Required | Type | Default | Description |
+| ---  | ---      | ---  | ---     | ---         |
+| tag | `false` | String | `'div'` | HTML tag for wrapping expandable title and content body |
+
+## Expandable Title
+
+The always visible section of the expandable item. This is the clickable portion to toggle the visibility of the content area.
+
+### Attributes & Props
+
+| Name | Required | Type | Default | Description |
+| ---  | ---      | ---  | ---     | ---         |
+| tag | `false` | String | `'dt'` | HTML tag for the expandable title |
+
+## Expandable Body
+
+The expandable's content area that is toggled between being shown or hidden.
+
+### Attributes & Props
+
+| Name | Required | Type | Default | Description |
+| ---  | ---      | ---  | ---     | ---         |
+| tag | `false` | String | `'dd'` | HTML tag for the expandable's content body |
