@@ -35,7 +35,7 @@ export default {
         this.internalActive.push(index)
       }
 
-      this.$emit('updated', this.internalActive)
+      this.$emit('onOpen', this.internalActive)
     },
     updateActiveIndex (index) {
       if (this.accordion) {
@@ -49,7 +49,7 @@ export default {
         this.internalActive.push(index)
       }
 
-      this.$emit('updated', this.internalActive)
+      this.$emit('onOpen', this.internalActive)
     }
   },
   render (h) {
