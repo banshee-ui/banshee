@@ -11,11 +11,12 @@ export default {
     },
     defaultSelected: {
       type: [Array, String, Number],
-      default: 0
+      default: null
     },
     items: {
       type: Array,
-      required: true
+      required: true,
+      default: null
     },
     itemKey: {
       type: String,
@@ -88,7 +89,10 @@ export default {
     },
     focusItem (index) {
       this.focusedIndex = index
-      this.$emit('onFocus', index)
+      this.$emit('onFocus', {
+        index,
+        item: this.items[index]
+      })
     },
     selectItem () {
       if (!this.selected.includes(this.currentItem)) {
@@ -155,7 +159,8 @@ export default {
               focus: this.focusItem,
               focused: this.focusedIndex,
               selected: this.selected,
-              selectItem: this.selectItem
+              selectItem: this.selectItem,
+              ...options.propsData
             },
             key,
             ...child.data
@@ -173,6 +178,8 @@ export default {
         focused: this.focusedIndex,
         selectItem: this.selectItem,
         selectedItems: this.selected,
+        total: this.items.length,
+        totalSelected: this.selected.length,
         transfer: this.transfer
       })
       : null
