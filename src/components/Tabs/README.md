@@ -82,12 +82,14 @@ Each clickable tab. Activates associated tab pane. *Must be a direct child of `<
 
 | Name | Required | Type | Default | Description |
 | ---  | ---      | ---  | ---     | ---         |
+| no-aria | `false` | Boolean | `false` | removes automatically applied aria attributes on the tab element, useful for when you'd rather apply it to children of the tab element |
 | tag | `false` | String | `'button'` | HTML tag for the tab |
 
 ### Scoped Slots
 
 | Property | Description |
 | ---      | ---         |
+| aria     | object containing aria attributes (`v-bind="aria"`), only available if `no-aria` prop is present |
 | index    | the tab's index |
 | updateActiveIndex | method to update the active index, takes an index as a parameter |
 
