@@ -141,3 +141,47 @@ Content for the associated tab.
   </template>
 </banshee-tabs>
 ```
+
+### Foundation
+
+```html
+<banshee-tabs>
+  <template slot-scope="{ active }">
+    <banshee-tab-list class="tabs" tag="ul">
+      <banshee-tab tag="li" no-aria 
+                    class="tabs-title is-active" 
+                    :class="{ 'is-active': active === 0 }">
+        <template slot-scope="{ aria, index }">
+          <a v-bind="aria">Ghosts</a>
+        </template>
+      </banshee-tab>
+      <banshee-tab tag="li" no-aria 
+                    class="tabs-title" :class="{ 'is-active': active === 1 }">
+        <template slot-scope="{ aria, index }">
+          <a v-bind="aria">Goblins</a> 
+        </template>
+      </banshee-tab>
+      <banshee-tab tag="li" no-aria 
+                    class="tabs-title" :class="{ 'is-active': active === 2 }">
+        <template slot-scope="{ aria, index }">
+          <a v-bind="aria">Ghouls</a>
+        </template>
+      </banshee-tab>
+    </banshee-tab-list>
+    <banshee-tab-panes class="tabs-content">
+      <transition name="fade" mode="out-in">
+        <banshee-tab-pane class="tabs-panel"
+                          :class="{ 'is-active': active === 0 }">Ghosts can be scary.</banshee-tab-pane>
+      </transition>
+      <transition name="fade" mode="out-in">
+        <banshee-tab-pane class="tabs-panel"
+                          :class="{ 'is-active': active === 1 }">Goblins are sneaky.</banshee-tab-pane>
+      </transition>
+      <transition name="fade" mode="out-in">
+        <banshee-tab-pane class="tabs-panel"
+                          :class="{ 'is-active': active === 2 }">Ghouls are dangerous!</banshee-tab-pane>
+      </transition>
+    </banshee-tab-panes>
+  </template>
+</banshee-tabs>
+```
