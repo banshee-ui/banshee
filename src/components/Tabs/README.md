@@ -169,18 +169,44 @@ Content for the associated tab.
       </banshee-tab>
     </banshee-tab-list>
     <banshee-tab-panes class="tabs-content">
-      <transition name="fade" mode="out-in">
-        <banshee-tab-pane class="tabs-panel"
-                          :class="{ 'is-active': active === 0 }">Ghosts can be scary.</banshee-tab-pane>
-      </transition>
-      <transition name="fade" mode="out-in">
-        <banshee-tab-pane class="tabs-panel"
-                          :class="{ 'is-active': active === 1 }">Goblins are sneaky.</banshee-tab-pane>
-      </transition>
-      <transition name="fade" mode="out-in">
-        <banshee-tab-pane class="tabs-panel"
-                          :class="{ 'is-active': active === 2 }">Ghouls are dangerous!</banshee-tab-pane>
-      </transition>
+      <banshee-tab-pane class="tabs-panel" :class="{ 'is-active': active === 0 }">
+        Ghosts can be scary.
+      </banshee-tab-pane>
+      <banshee-tab-pane class="tabs-panel" :class="{ 'is-active': active === 1 }">
+        Goblins are sneaky.
+      </banshee-tab-pane>
+      <banshee-tab-pane class="tabs-panel" :class="{ 'is-active': active === 2 }">
+        Ghouls are dangerous!
+      </banshee-tab-pane>
+    </banshee-tab-panes>
+  </template>
+</banshee-tabs>
+```
+
+### Semantic UI
+
+```html
+<banshee-tabs>
+  <template slot-scope="{ active }">
+    <banshee-tab-list class="ui top attached tabular menu">
+      <banshee-tab tag="a"
+                    class="item"
+                    :class="{ 'active': active === 0 }">
+          Ghosts
+      </banshee-tab>
+      <banshee-tab tag="a"
+                    class="item" :class="{ 'active': active === 1 }">
+          Goblins
+      </banshee-tab>
+      <banshee-tab tag="a"
+                    class="item" :class="{ 'active': active === 2 }">
+          Ghouls
+      </banshee-tab>
+    </banshee-tab-list>
+    <banshee-tab-panes class="ui bottom attached tab segment active">
+        <banshee-tab-pane>Ghosts can be scary.</banshee-tab-pane>
+        <banshee-tab-pane>Goblins are sneaky.</banshee-tab-pane>
+        <banshee-tab-pane>Ghouls are dangerous!</banshee-tab-pane>
     </banshee-tab-panes>
   </template>
 </banshee-tabs>
