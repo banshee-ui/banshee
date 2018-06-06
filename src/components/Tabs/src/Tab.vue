@@ -9,22 +9,39 @@ export default {
     index: {
       type: Number
     },
-    updateIndex: {
-      type: Function
+    noAria: {
+      type: Boolean,
+      default: false
     },
     tag: {
       type: [String, Object],
       default: 'button'
+    },
+    updateIndex: {
+      type: Function
     }
   },
   inject: ['tabs'],
+  computed: {
+    getAria () {
+      const isActive = this.index === this.tabs.getActiveIndex
+
+      return {
+        attrs: {
+          role: 'tab',
+          tabindex: isActive ? 0 : -1,
+          'aria-selected': String(isActive)
+        }
+      }
+    }
+  },
   render (h) {
     let children
     const isScoped = this.$scopedSlots.default
-    const isActive = this.index === this.tabs.getActiveIndex
 
     if (isScoped) {
       children = this.$scopedSlots.default({
+        aria: this.noAria ? { ...this.getAria.attrs } : null,
         index: this.index,
         updateActiveIndex: this.updateIndex
       })
@@ -33,11 +50,7 @@ export default {
     }
 
     return h(this.tag, {
-      attrs: {
-        role: 'tab',
-        tabindex: isActive ? 0 : -1,
-        'aria-selected': String(isActive)
-      },
+      attrs: !this.noAria ? { ...this.getAria.attrs } : null,
       on: {
         click: () => {
           if (!this.disabled) {
