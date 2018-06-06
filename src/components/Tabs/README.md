@@ -185,6 +185,33 @@ Content for the associated tab.
 </banshee-tabs>
 ```
 
+### Bulma 
+
+```html
+<banshee-tabs>
+  <template slot-scope="{ active }">
+    <div class="tabs">
+      <banshee-tab-list tag="ul">
+        <banshee-tab tag="li" :class="{ 'is-active': active === 0 }">
+            <a>Ghosts</a>
+        </banshee-tab>
+        <banshee-tab tag="li" :class="{ 'is-active': active === 1 }">
+            <a>Goblins</a>
+        </banshee-tab>
+        <banshee-tab tag="li" :class="{ 'is-active': active === 2 }">
+            <a>Ghouls</a>
+        </banshee-tab>
+      </banshee-tab-list>
+    </div>
+    <banshee-tab-panes>
+        <banshee-tab-pane>Ghosts can be scary.</banshee-tab-pane>
+        <banshee-tab-pane>Goblins are sneaky.</banshee-tab-pane>
+        <banshee-tab-pane>Ghouls are dangerous!</banshee-tab-pane>
+    </banshee-tab-panes>
+  </template>
+</banshee-tabs>
+```
+
 ### Semantic UI
 
 ```html
