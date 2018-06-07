@@ -2,6 +2,10 @@
 export default {
   name: 'BansheeExpandableTitle',
   props: {
+    controls: {
+      type: String,
+      default: null
+    },
     tag: {
       type: String,
       default: 'dt'
@@ -12,18 +16,40 @@ export default {
     'itemIndex',
     'updateIndex'
   ],
+  data: () => ({
+    focused: false
+  }),
+  computed: {
+    isActive () {
+      return String(this.activeItems.internalActive.includes(this.itemIndex))
+    },
+    isFocused () {
+      return String(this.focused)
+    }
+  },
   methods: {
+    addFocus () {
+      this.focused = true
+    },
     update () {
       this.updateIndex(this.itemIndex)
+    },
+    removeFocus () {
+      this.focused = false
     }
   },
   render (h) {
     return h(this.tag, {
       attrs: {
-        'aria-expanded': this.activeItems.internalActive.includes(this.itemIndex)
+        'aria-expanded': this.isActive,
+        'aria-selected': this.isFocused,
+        'aria-controls': this.controls,
+        role: 'tab'
       },
       on: {
-        click: this.update
+        blur: this.removeFocus,
+        click: this.update,
+        focus: this.addFocus
       }
     }, this.$slots.default)
   }
