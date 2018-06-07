@@ -113,4 +113,28 @@ The expandable's content area that is toggled between being shown or hidden.
 
 | Name | Required | Type | Default | Description |
 | ---  | ---      | ---  | ---     | ---         |
+| label-by | `false` | String | `null` | The `id` of the element triggering the panel to open/close |
 | tag | `false` | String | `'dd'` | HTML tag for the expandable's content body |
+
+## More Examples
+
+### Bootstrap 4
+
+```html
+<banshee-expandable tag="div">
+  <banshee-expandable-item>
+    <p>
+      <banshee-expandable-title tag="button" class="btn btn-primary" controls="example1">
+        Button
+      </banshee-expandable-title>
+    </p>
+    <transition name="fade">
+      <banshee-expandable-body id="example1" tag="div" class="collapse show">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </banshee-expandable-body>
+    </transition>
+  </banshee-expandable-item>
+</banshee-expandable>
+```
