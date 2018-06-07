@@ -10,13 +10,26 @@ export default {
       default: 'div'
     }
   },
+  inject: ['expandable'],
   provide () {
     return {
       itemIndex: this.index
     }
   },
+  computed: {
+    isActive () {
+      return this.expandable.internalActive.includes(this.index)
+    },
+    isScoped () {
+      return this.$scopedSlots.default
+    }
+  },
   render (h) {
-    return h(this.tag, this.$slots.default)
+    const children = this.isScoped
+      ? this.$scopedSlots.default({ isActive: this.isActive })
+      : this.$slots.default
+
+    return h(this.tag, children)
   }
 }
 </script>

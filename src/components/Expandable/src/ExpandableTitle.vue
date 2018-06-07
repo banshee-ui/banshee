@@ -12,7 +12,7 @@ export default {
     }
   },
   inject: [
-    'activeItems',
+    'expandable',
     'itemIndex',
     'updateIndex'
   ],
@@ -21,7 +21,7 @@ export default {
   }),
   computed: {
     isActive () {
-      return String(this.activeItems.internalActive.includes(this.itemIndex))
+      return String(this.expandable.internalActive.includes(this.itemIndex))
     },
     isFocused () {
       return String(this.focused)

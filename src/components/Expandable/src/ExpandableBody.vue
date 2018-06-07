@@ -13,10 +13,10 @@ export default {
       default: 'dd'
     }
   },
-  inject: ['activeItems', 'itemIndex'],
+  inject: ['expandable', 'itemIndex'],
   computed: {
     isActive () {
-      return this.activeItems.internalActive.includes(this.itemIndex)
+      return this.expandable.internalActive.includes(this.itemIndex)
     }
   },
   render (h) {

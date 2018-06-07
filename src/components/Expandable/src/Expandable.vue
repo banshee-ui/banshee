@@ -19,7 +19,7 @@ export default {
   },
   provide () {
     return {
-      activeItems: this.$data,
+      expandable: this.$data,
       updateIndex: this.updateActiveIndex
     }
   },
@@ -65,9 +65,11 @@ export default {
 
       if (options && toPascal(options.tag) === BansheeExpandableItem.name) {
         return h(BansheeExpandableItem, {
+          ...child.data,
           props: {
             active: this.internalActive,
-            index
+            index,
+            ...options.propsData
           }
         }, options.children)
       }
