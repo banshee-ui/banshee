@@ -95,6 +95,12 @@ Designates an area as an expandable section. Must be a direct child of the `<ban
 | ---  | ---      | ---  | ---     | ---         |
 | tag | `false` | String | `'div'` | HTML tag for wrapping expandable title and content body |
 
+### Scoped Slots
+
+| Property | Description |
+| ---      | ---         |
+| isActive | boolean indicating whether the expandable item is currently active or not |
+
 ## Expandable Title
 
 The always visible section of the expandable item. This is the clickable portion to toggle the visibility of the content area.
@@ -135,6 +141,44 @@ The expandable's content area that is toggled between being shown or hidden.
         </div>
       </banshee-expandable-body>
     </transition>
+  </banshee-expandable-item>
+</banshee-expandable>
+```
+
+### Foundation
+
+```html
+<banshee-expandable class="accordion">
+  <banshee-expandable-item class="accordion-item">
+    <banshee-expandable-title tag="a" class="accordion-title" controls="example1">
+      Button
+    </banshee-expandable-title>
+    <transition name="fade">
+      <banshee-expandable-body id="example1" tag="div" class="accordion-content">
+        <p>Panel 1. Lorem ipsum dolor.</p>
+      </banshee-expandable-body>
+    </transition>
+  </banshee-expandable-item>
+</banshee-expandable>
+```
+
+### Semantic UI
+
+```html
+<banshee-expandable class="ui accordion">
+  <banshee-expandable-item>
+    <template slot-scope="{ isActive }">
+      <banshee-expandable-title tag="span" class="title" :class="{ active: isActive }" controls="example1">
+        <i class="dropdown icon" aria-hidden="true"></i>
+        Button
+      </banshee-expandable-title>
+      
+      <transition name="fade">
+        <banshee-expandable-body id="example1" tag="div" class="content">
+          <p>Panel 1. Lorem ipsum dolor.</p>
+        </banshee-expandable-body>
+      </transition>
+    </template>
   </banshee-expandable-item>
 </banshee-expandable>
 ```
