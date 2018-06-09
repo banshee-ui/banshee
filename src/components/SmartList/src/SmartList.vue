@@ -2,6 +2,13 @@
 export default {
   name: 'BansheeSmartList',
   props: {
+    defaultSort: {
+      type: String,
+      default: null,
+      validator (value) {
+        return ['asc', 'desc'].includes(value)
+      }
+    },
     filterMethod: {
       type: Function
     },
@@ -28,7 +35,7 @@ export default {
   data: () => ({
     sort: {
       by: this.sortKey,
-      order: -1
+      order: 1
     }
   }),
   computed: {
@@ -47,7 +54,7 @@ export default {
         })
       }
 
-      if (this.sort.by) {
+      if (this.sort.by || this.defaultSort) {
         data = data.slice().sort((a, b) => {
           if (typeof a === 'object' && typeof b === 'object') {
             a = a[this.sort.by]
@@ -58,6 +65,13 @@ export default {
       }
 
       return data
+    }
+  },
+  created () {
+    if (this.defaultSort) {
+      this.sort.order = this.defaultSort === 'asc'
+        ? this.sort.order
+        : this.sort.order * -1
     }
   },
   methods: {
