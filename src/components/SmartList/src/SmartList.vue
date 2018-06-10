@@ -16,10 +16,6 @@ export default {
       type: Array,
       required: true
     },
-    itemKey: {
-      type: String,
-      default: 'id'
-    },
     sortMethod: {
       type: Function
     },
