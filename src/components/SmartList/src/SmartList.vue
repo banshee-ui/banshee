@@ -10,14 +10,16 @@ export default {
       }
     },
     filterMethod: {
-      type: Function
+      type: Function,
+      default: null
     },
     items: {
       type: Array,
       required: true
     },
     sortMethod: {
-      type: Function
+      type: Function,
+      default: null
     },
     sortKey: {
       type: String,
@@ -39,28 +41,38 @@ export default {
       let data = this.items
 
       if (this.query) {
-        data = data.filter(row => {
-          if (typeof row === 'object') {
-            return Object.keys(row).some(key => {
-              return String(row[key]).toLowerCase().includes(this.query.toLowerCase())
-            })
-          }
-
-          return String(row).toLowerCase().includes(this.query.toLowerCase())
-        })
+        data = !this.filterMethod
+          ? this.searchedItems
+          : this.filterMethod(this.query, this.items)
       }
 
       if (this.sort.by || this.defaultSort) {
-        data = data.slice().sort((a, b) => {
-          if (typeof a === 'object' && typeof b === 'object') {
-            a = a[this.sort.by]
-            b = b[this.sort.by]
-          }
-          return (a === b ? 0 : a > b ? 1 : -1) * this.sort.order
-        })
+        data = !this.sortMethod
+          ? this.sortedItems
+          : this.sortMethod(this.sort, this.searchedItems)
       }
 
       return data
+    },
+    searchedItems () {
+      return this.items.filter(row => {
+        if (typeof row === 'object') {
+          return Object.keys(row).some(key => {
+            return String(row[key]).toLowerCase().includes(this.query.toLowerCase())
+          })
+        }
+
+        return String(row).toLowerCase().includes(this.query.toLowerCase())
+      })
+    },
+    sortedItems () {
+      return this.searchedItems.slice().sort((a, b) => {
+        if (typeof a === 'object' && typeof b === 'object') {
+          a = a[this.sort.by]
+          b = b[this.sort.by]
+        }
+        return (a === b ? 0 : a > b ? 1 : -1) * this.sort.order
+      })
     }
   },
   created () {
