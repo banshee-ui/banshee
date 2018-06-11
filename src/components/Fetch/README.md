@@ -20,7 +20,11 @@ Banshee component for handling APIs.
 </template>
 ```
 
-## Props
+The `<banshee-fetch>` component is an abstraction over the browser's own `fetch` API. Instead of using methods, mixins, and lifecycle hooks to manage API data you can create services via the `<banshee-fetch>` component.
+
+## Banshee Fetch
+
+### Attributes & Props
 
 The `banshee-fetch` component takes much of the same options that the Browser [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) does since it's built directly on top of it.
 
@@ -37,3 +41,18 @@ The `banshee-fetch` component takes much of the same options that the Browser [f
 | referrer | false | String | `'client'` | A `USVString` specifying `no-referrer`, `client`, or a URL. |
 | url | true | String | N/A | The API url. |
 
+### Events
+
+| Event | Parameters | Description |
+| ---   | ---        | ---         |
+| onDataReceived | (data) | occurs on successful ajax call, returns response data from ajax call |
+| onError | (error) | occurs when ajax call results in error, returns ajax response error |
+
+### Scoped Slots
+
+| Property | Description |
+| ---      | ---         |
+| error    | error object if the ajax call caught an error |
+| loading  | boolean, whether or not we are still waiting for response from server |
+| response | response data from server from successful fetch |
+| fetch    | method, if `lazy` prop is present utilize this to trigger fetch |
