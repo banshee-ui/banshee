@@ -84,6 +84,10 @@ export default {
         this.currentIndex = 0
       }
 
+      if (this.autoplay) {
+        this.resetTime()
+      }
+
       this.$emit('onChange', this.currentIndex)
     },
     pause () {
@@ -101,7 +105,15 @@ export default {
         this.currentIndex = this.length - 1
       }
 
+      if (this.autoplay) {
+        this.resetTime()
+      }
+
       this.$emit('onChange', this.currentIndex)
+    },
+    resetTime () {
+      this.autoplayTime = clearInterval(this.autoplayTime)
+      this.autoplayTime = setInterval(this.nextSlide, this.speed)
     }
   },
   render (h) {
