@@ -90,9 +90,11 @@ export default {
         .then(data => {
           this.loading = false
           this.response = data
+          this.$emit('onDataReceived', data)
         })
         .catch(error => {
           this.error = error
+          this.$emit('onError', error)
         })
     }
   },
