@@ -103,3 +103,56 @@ slides: [
 | Name | Required | Type | Default | Description |
 | ---  | ---      | ---  | ---     | ---         |
 | tag  | `false`  | String | `li`  | HTML tag for carousel slide |
+
+## More Examples
+
+### Carousel with Buttons
+
+```html
+<banshee-carousel autoplay transition-name="fade" transition-mode="out-in">
+  <banshee-carousel-slide>
+    ...
+  </banshee-carousel-slide>
+
+  <banshee-carousel-slide>
+    ...
+  </banshee-carousel-slide>
+
+  <banshee-carousel-slide>
+    ...
+  </banshee-carousel-slide>
+
+  <template slot-scope="{ next, pause, play, previous, btnAttrs }">
+    <button @click="previous" v-bind="btnAttrs.previous">Previous</button>
+    <button @click="play" v-bind="btnAttrs.play">Play</button>
+    <button @click="pause" v-bind="btnAttrs.pause">Pause</button>
+    <button @click="next" v-bind="btnAttrs.next">Next</button>
+  </template>
+</banshee-carousel>
+```
+
+### Bootstrap 4
+
+```html
+<banshee-carousel autoplay transition-name="fade" transition-mode="out-in" tag="div" class="carousel slide">  
+  <banshee-carousel-slide v-for="slide in slides" :key="slide.id" tag="div" class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" :src="slide.src">
+    </div>
+  </banshee-carousel-slide>
+
+  <template slot-scope="{ next, pause, play, previous, btnAttrs }">
+    <a class="carousel-control-prev" role="button"
+        @click="previous" v-bind="btnAttrs.previous">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="carousel-control-next" role="button"
+        @click="next" v-bind="btnAttrs.next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </template>
+</banshee-carousel>   
+```
