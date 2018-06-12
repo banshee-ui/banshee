@@ -45,6 +45,8 @@ export default {
     }
   },
   render () {
+    let toRender = false
+
     if (!this.maxWidth && !this.minWidth) {
       console.warn(`You must set one of the props, 'max-width' or 'min-width' to true.`)
       return
@@ -54,8 +56,6 @@ export default {
       console.warn(`The props 'max-width' and 'min-width' are active when only one is allowed.`)
       return
     }
-
-    let toRender = false
 
     if ((this.maxWidth && this.display === 'hidden') || (this.minWidth && this.display === 'visible')) {
       toRender = this.width <= this.at
