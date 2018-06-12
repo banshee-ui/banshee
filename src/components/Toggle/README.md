@@ -3,6 +3,7 @@
 Banshee toggle component.
 
 ## Basic Usage
+
 ```html
 <template>
   <div id="app">
@@ -15,48 +16,36 @@ Banshee toggle component.
 </template>
 ```
 
-## Props
+## Toggle
 
-### default-on
+### Attributes & Props
 
-The initial "on" state. Defaults to `false`.
-**type**: `Boolean`
+| Name | Required | Type | Default | Description |
+| ---  | ---      | ---  | ---     | ---         |
+| default-on | `false` | Boolean | `false` | the initial `on` state |
+| on | `false` | Boolean | `undefined` | makes toggle state controlled by you rather internally, aka makes it a "controlled component" |
+| on-toggle | `false` | Function | `() => ({})` | function to execute every time the toggle component is toggled |
 
-### on
+### Events
 
-The Banshee toggle component will manage it's own state internally. If you need to control the component's state yourself set the `on` prop to `true` or `false` and control the toggle yourself through events or `on-toggle` prop.
+| Event | Parameters | Description |
+| ---   | ---        | ---         |
+| onSetOn | (on) | occurs when the toggle is set to "on" state, aka `true`, provides current on state as parameter |
+| onSetOff | (on) | occurs when the toggle is set to "off" state, aka `false`, provides current on state as parameter |
+| onToggle | (on) | occurs when the toggle is toggled, provides current on state as parameter |
 
-**type**: `Boolean`
+### Scoped Slots
 
-### on-toggle
+| Property | Description |
+| ---      | ---         |
+| attrs    | aria helpers for accessiblity, use `v-bind="attrs"` to attach to an element |
+| on       | current state of the toggle component's `on` state |
+| setOn    | set the toggle component's `on` state to `true` |
+| setOff   | set the toggle component's `on` state to `false` |
+| toggle   | toggle the current state of the component's `on` state |
+| inputToggle | handlers for attaching internal click/keyup actions to the element, use `v-on="inputActions"` |
 
-Callback function fired when using `toggle` function provided by render prop. This function receives the current toggle state (`true`/`false`) as a parameter.
-
-**type**: `Function`
-
-**params**: `Boolean` - Toggle state
-
-## Events
-
-### @setOn
-
-Fired when the `setOn` function provided by the render prop is invoked.
-
-**params**: `Boolean` - Toggle state
-
-### @setOff
-
-Fired when the `setOff` function provided by the render prop is invoked.
-
-**params**: `Boolean` - Toggle state
-
-### @onToggle
-
-Fired when the `toggle` function provided by the render prop is invoked.
-
-**params**: `Boolean` - Toggle state
-
-## Other Examples
+## More Examples
 
 ### Accessibility
 
@@ -76,7 +65,7 @@ We can use `v-bind` object syntax to receive the `attrs` parameter from the rend
 </template>
 ```
 
-### Controlled
+### Controlled Toggle Component
 
 ```html
 <template>
@@ -94,7 +83,6 @@ We can use `v-bind` object syntax to receive the `attrs` parameter from the rend
 <script>
 export default {
   name: 'app',
-  components: { BansheeToggle },
   data: () => ({
     on: false
   }),
