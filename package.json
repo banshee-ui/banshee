@@ -1,14 +1,24 @@
 {
-  "name": "banshee",
-  "version": "0.1.0",
-  "private": true,
+  "name": "banshee-ui",
+  "description": "A mostly renderless Vue UI component and utility library.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "Dillon Chanis",
+    "email": "dillonchanis92@gmail.com"
+  },
+  "repository": "banshee-ui/banshee",
+  "main": "dist/BansheeUI.umd.js",
+  "module": "dist/BansheeUI.common.js",
+  "unpkg": "dist/BansheeUI.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test",
     "e2e": "vue-cli-service e2e",
     "lint": "vue-cli-service lint",
-    "e2e:open": "vue-cli-service e2e:open"
+    "e2e:open": "vue-cli-service e2e:open",
+    "package": "vue-cli-service build --target lib --name BansheeUI src/index.js"
   },
   "dependencies": {
     "vue": "^2.5.16"
@@ -43,5 +53,16 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "banshee",
+    "banshee-ui",
+    "component",
+    "components",
+    "vue-components",
+    "renderless",
+    "javascript"
+  ]
 }
