@@ -23,11 +23,11 @@ export default {
     attrs () {
       return {
         tabIndex: 0,
-        'aria-expanded': Boolean(this.getOn)
+        'aria-expanded': String(Boolean(this.getOn))
       }
     },
     getOn () {
-      return this.isOnControlled ? this.on : this.internalOn
+      return this.isControlled ? this.on : this.internalOn
     },
     inputActions () {
       return {
@@ -39,7 +39,7 @@ export default {
         }
       }
     },
-    isOnControlled () {
+    isControlled () {
       return this.on !== undefined
     },
     toggler () {
@@ -53,12 +53,12 @@ export default {
     setOn () {
       this.internalOn = true
       this.onToggle(this.getOn)
-      this.$emit('setOn', this.getOn)
+      this.$emit('onSetOn', this.getOn)
     },
     setOff () {
       this.internalOn = false
       this.onToggle(this.getOn)
-      this.$emit('setOff', this.getOn)
+      this.$emit('onSetOff', this.getOn)
     },
     toggle () {
       this.internalOn = !this.internalOn

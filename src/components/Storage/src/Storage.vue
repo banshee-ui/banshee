@@ -3,10 +3,12 @@ export default {
   name: 'BansheeStorage',
   props: {
     get: {
-      type: [Array, String]
+      type: [Array, String],
+      default: null
     },
     set: {
-      type: [Array, Object]
+      type: [Array, Object],
+      default: null
     },
     type: {
       type: String,
@@ -71,7 +73,7 @@ export default {
       this.storage.clear()
       this.result = {}
 
-      this.$emit('clear')
+      this.$emit('onClear')
     },
     getItem (key) {
       if (!key) {
@@ -82,7 +84,7 @@ export default {
       const item = this.storage.getItem(key)
       this.$set(this.result, key, item)
 
-      this.$emit('getItem', {
+      this.$emit('onGetItem', {
         item,
         result: this.result,
         store: this.storage
@@ -91,7 +93,7 @@ export default {
     key (property, index) {
       this.$set(this.result, property, this.storage.key(index))
 
-      this.$emit('key', {
+      this.$emit('onKeyed', {
         key: this.storage.key(index),
         result: this.result,
         store: this.storage
@@ -100,7 +102,7 @@ export default {
     removeItem (key) {
       this.storage.removeItem(key)
 
-      this.$emit('removeItem', {
+      this.$emit('onRemoveItem', {
         result: this.result,
         store: this.storage
       })
@@ -110,7 +112,7 @@ export default {
         this.storage.removeItem(key)
       })
 
-      this.$emit('removeItem', {
+      this.$emit('onRemoveItem', {
         result: this.result,
         store: this.storage
       })
@@ -124,7 +126,7 @@ export default {
       this.storage.setItem(key, value)
       this.$set(this.result, key, value)
 
-      this.$emit('setItem', {
+      this.$emit('onSetItem', {
         result: this.result,
         store: this.storage
       })
