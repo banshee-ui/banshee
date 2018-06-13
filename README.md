@@ -16,9 +16,10 @@ Banshee is a component library for Vue which seeks to only provide the JavaScrip
 
 Banshee allows you to focus on building custom applications the way you want them to look without having to conform to another library's design specs.  Gain complete control on how you build Vue applications.
 
-**NOTE: Banshee is under active development and should not be used in a production environment. Except API changes before Beta release.**
+**NOTE: Banshee is under active development and should not be used in a production environment. Expect API changes before Beta release.**
 
 ## Installation
 
-_Beta coming soon._
-
+```bash
+npm install --save banshee-ui
+````
