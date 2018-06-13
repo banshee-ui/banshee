@@ -24,7 +24,7 @@ export default {
   },
   errorCaptured (err, vm, info = '') {
     this.error = true
-    this.$emit('errorCaptured', { err, vm, info })
+    this.$emit('onErrorCaptured', { err, vm, info })
     if (this.onError) this.onError(err, vm, info)
     if (this.stopPropagation) return false
   },
