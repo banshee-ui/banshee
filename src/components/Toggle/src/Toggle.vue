@@ -2,6 +2,7 @@
 import enableClick from '@/utils/enableClick'
 
 export default {
+  name: 'BansheeToggle',
   props: {
     defaultOn: {
       type: Boolean,
