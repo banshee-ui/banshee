@@ -8,8 +8,6 @@
   A mostly renderless Vue UI component and utility library.
 </p>
 
----
-
 ## Introduction
 
 Banshee is a component library for Vue which seeks to only provide the JavaScript functionality and leaves the HTML markup and styling to you.  It ships with no CSS and minimal to no HTML in all components.
@@ -22,4 +20,9 @@ Banshee allows you to focus on building custom applications the way you want the
 
 ```bash
 npm install --save banshee-ui
-````
+```
+
+## Documentation
+
+You can find the official documentation for Banshee [here](https://banshee-ui.github.io/docs/).
+
