@@ -1,8 +1,10 @@
-# Banshee Expandable
+# Expandable
 
 Toggle the visibility of content within Banshee expandables.
 
 ## Basic Usage
+
+[![Edit Banshee - Expandable Basic](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/kkq0mmznm7)
 
 ```html
 <banshee-expandable>
@@ -126,6 +128,8 @@ The expandable's content area that is toggled between being shown or hidden.
 
 ### Bootstrap 4
 
+[![Edit Banshee - Bootstrap 4 Expandable](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/w77xlxqv58?module=%2Fsrc%2FApp.vue)
+
 ```html
 <banshee-expandable tag="div">
   <banshee-expandable-item>
@@ -147,6 +151,8 @@ The expandable's content area that is toggled between being shown or hidden.
 
 ### Foundation
 
+[![Edit Banshee - Foundation Expandable](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ly5p4o6ko9?module=%2Fsrc%2FApp.vue)
+
 ```html
 <banshee-expandable class="accordion">
   <banshee-expandable-item class="accordion-item">
@@ -163,6 +169,8 @@ The expandable's content area that is toggled between being shown or hidden.
 ```
 
 ### Semantic UI
+
+[![Edit Banshee - SemanticUI Expandable](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/0q6w2jv6ln?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-expandable class="ui accordion">

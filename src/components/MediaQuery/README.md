@@ -1,8 +1,10 @@
-# Banshee Media Query
+# Media Query
 
 CSS Media Query for your Vue templates to conditionally render components based on screen width.
 
 ## Usage
+
+[![Edit Banshee - MediaQuery Basic](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/n21841m64?module=%2Fsrc%2FApp.vue)
 
 ```html
 <!-- Hide 'hello' text at 600+ pixels  -->
@@ -46,6 +48,8 @@ To return multiple elements, just wrap them within a root node like so:
 ## More Examples
 
 ### Table (Desktop) to Card (Mobile)
+
+[![Edit Banshee - MediaQuery Table/Card Views](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/pw404x1rpj?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-media-query display="hidden" min-width at="787">

@@ -1,4 +1,4 @@
-# Banshee Simple List
+# Simple List
 
 A functional component list iterator.  Useful for displaying large lists of data and static lists like menus or navigation.
 
@@ -21,7 +21,7 @@ data: () => ({
 
 The `<banshee-simple-list>` is a very simple iterator for arrays of data.  If you are looking for more robust list solution with methods like sorting, grouping, and filtering of data you may want to look into the `<banshee-smart-list>` component.
 
-## Banshee Simple List
+## Simple List
 
 ### Scoped Slots
 
@@ -33,6 +33,8 @@ The `<banshee-simple-list>` is a very simple iterator for arrays of data.  If yo
 ## More Examples
 
 ### Bootstrap 4
+
+[![Edit Banshee - Bootstrap 4 SimpleList](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/2p885zpw70?module=%2Fsrc%2FApp.vue)
 
 ```html
 <ul class="list-group">
@@ -46,6 +48,8 @@ The `<banshee-simple-list>` is a very simple iterator for arrays of data.  If yo
 
 ### Foundation
 
+[![Edit Banshee - SimpleList Foundation](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ly1porr8lq?module=%2Fsrc%2FApp.vue)
+
 ```html
 <ul class="menu">
   <banshee-simple-list :items="links">
@@ -58,6 +62,8 @@ The `<banshee-simple-list>` is a very simple iterator for arrays of data.  If yo
 
 ### Semantic UI
 
+[![Edit Banshee - SimpleList SemanticUI](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ovr2r86jxy?module=%2Fsrc%2FApp.vue)
+
 ```html
 <ul class="ui list">
   <banshee-simple-list :items="characters">
@@ -69,6 +75,8 @@ The `<banshee-simple-list>` is a very simple iterator for arrays of data.  If yo
 ```
 
 ### Bulma
+
+[![Edit Banshee - SimpleList Bulma](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/6znlyyqnn?module=%2Fsrc%2FApp.vue)
 
 ```html
 <aside class="menu">

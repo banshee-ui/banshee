@@ -1,4 +1,4 @@
-# Banshee Carousel
+# Carousel
 
 A basic carousel component for looping through slides of images or text.
 
@@ -57,6 +57,8 @@ slides: [
 }
 </style>
 ```
+
+[![Edit Banshee - Carousel](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/o7zpp38815)
 
 ## Carousel
 
@@ -132,6 +134,8 @@ slides: [
 ```
 
 ### Bootstrap 4
+
+[![Edit Banshee - Bootstrap 4 Carousel](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/38mokl6k4m?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-carousel autoplay transition-name="fade" transition-mode="out-in" tag="div" class="carousel slide">  

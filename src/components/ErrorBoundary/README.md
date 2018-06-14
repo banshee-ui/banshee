@@ -1,4 +1,4 @@
-# Banshee Error Boundary
+# Error Boundary
 
 A reusable error boundary component for catching JavaScript errors and displaying fallback UIs.
 

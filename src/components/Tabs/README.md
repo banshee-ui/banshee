@@ -1,8 +1,10 @@
-# Banshee Tabs
+# Tabs
 
 Banshee tabs are grouped sections of content that display one panel of content at a time.
 
 ## Basic Usage
+
+[![Edit Banshee - Tabs Basic](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/lx366kwxl7?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-tabs>
@@ -29,7 +31,7 @@ The tabs are composed of the following components:
 
 Tabs are associated with their panes via index, so order defined matters. For example, the tab `<banshee-tab>Ghosts</banshee-tab>` is associated with `<banshee-tab-pane>Ghosts can be scary.</banshee-tab-pane>` because they are the same index within their respective parent component.
 
-## Banshee Tabs
+## Tabs
 
 Wrapper component that controls and initalizes the tab's state.
 
@@ -54,7 +56,7 @@ Wrapper component that controls and initalizes the tab's state.
 | active   | current active index |
 | updateActiveIndex | method to update the active index, takes an index as a parameter |
 
-## Banshee Tab List
+## Tab List
 
 Component that controls each individual tab.
 
@@ -64,7 +66,7 @@ Component that controls each individual tab.
 | ---  | ---      | ---  | ---     | ---         |
 | tag | `false` | String | `'div'` | HTML tag for wrapping element of tabs |
 
-## Banshee Tab Panes
+## Tab Panes
 
 Component that controls each individual tab content pane.
 
@@ -74,7 +76,7 @@ Component that controls each individual tab content pane.
 | ---  | ---      | ---  | ---     | ---         |
 | tag | `false` | String | `'div'` | HTML tag for wrapping element of tab panes |
 
-## Banshee Tab
+## Tab
 
 Each clickable tab. Activates associated tab pane. *Must be a direct child of `<banshee-tab-list>`*.
 
@@ -93,7 +95,7 @@ Each clickable tab. Activates associated tab pane. *Must be a direct child of `<
 | index    | the tab's index |
 | updateActiveIndex | method to update the active index, takes an index as a parameter |
 
-## Banshee Tab Pane
+## Tab Pane
 
 Content for the associated tab.
 
@@ -108,6 +110,8 @@ Content for the associated tab.
 ## More Examples
 
 ### Bootstrap 4 
+
+[![Edit Banshee - Tabs Bootstrap 4](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/p59112l0rj?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-tabs>
@@ -145,6 +149,8 @@ Content for the associated tab.
 ```
 
 ### Foundation
+
+[![Edit Banshee - Tabs Bootstrap 4](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/520v43wnml?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-tabs>
@@ -187,6 +193,8 @@ Content for the associated tab.
 
 ### Bulma 
 
+[![Edit Banshee - Tabs Bulma](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/0vp6r796zw?module=%2Fsrc%2FApp.vue)
+
 ```html
 <banshee-tabs>
   <template slot-scope="{ active }">
@@ -213,6 +221,8 @@ Content for the associated tab.
 ```
 
 ### Semantic UI
+
+[![Edit Banshee - Tabs Semantic UI](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/6nv8qp1n7z?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-tabs>

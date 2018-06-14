@@ -1,8 +1,10 @@
-# Banshee Listbox
+# Listbox
 
 The listbox displays a list of items/options that are selectable to the user.
 
 ## Basic Usage
+
+[![Edit Banshee - Listbox Basic](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/237lz66rj?module=%2Fsrc%2FApp.vue)
 
 ```html
 <banshee-listbox :items="forsaken">
@@ -26,7 +28,7 @@ The listbox is composed of two tags:
 - `<banshee-listbox>` - parent tag, designates area to be a listbox and initializes internal state + keyboard interactions
 - `<banshee-listbox-item>` - direct child of `<banshee-listbox>`, exposes scoped slot for content rendering helpers
 
-## Banshee Listbox
+## Listbox
 
 ### Attributes & Props
 
@@ -60,7 +62,7 @@ The listbox is composed of two tags:
 | totalSelected | the length of the selected array |
 | transfer | method to setup new focus and reset internal state on item transfers |
 
-## Banshe Listbox Item
+## Listbox Item
 
 ### Attributes & Props
 
@@ -110,7 +112,6 @@ export default {
   name: 'app',
   data () {
     return {
-      filter: '',
       characters: [
         'Varian', 'Sylvanas', 'Thrall', 'Saurfang',
         'Malfurion', 'Tyrande', 'Greymane', 'Nathanos',
