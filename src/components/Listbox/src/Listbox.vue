@@ -50,7 +50,9 @@ export default {
     _handleDefaultSelected () {
       if (!Array.isArray(this.defaultSelected)) {
         const index = parseInt(this.defaultSelected)
-        this.selected.push(this.items[index])
+        const item = this.items[index]
+
+        if (item) this.selected.push(item)
       } else {
         this.selected = this.defaultSelected.map(i => this.items[i])
       }
@@ -95,7 +97,7 @@ export default {
       })
     },
     selectItem () {
-      if (!this.selected.includes(this.currentItem)) {
+      if (this.currentItem && !this.selected.includes(this.currentItem)) {
         this.selected.push(this.currentItem)
 
         this.$emit('onSelectItem', {
@@ -146,10 +148,10 @@ export default {
           let key
 
           // If item is not an object
-          if (!item[this.itemKey]) {
-            key = `${item}-${index}`
-          } else {
+          if (item[this.itemKey]) {
             key = item[this.itemKey]
+          } else {
+            key = `${item}-${index}`
           }
 
           return h(BansheeListboxItem, {
