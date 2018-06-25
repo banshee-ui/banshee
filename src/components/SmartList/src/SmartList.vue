@@ -30,13 +30,18 @@ export default {
       default: ''
     }
   },
-  data: () => ({
-    sort: {
-      by: this.sortKey,
-      order: 1
+  data () {
+    return {
+      sort: {
+        by: this.sortKey,
+        order: 1
+      }
     }
-  }),
+  },
   computed: {
+    head () {
+      return this.filteredItems[0]
+    },
     filteredItems () {
       let data = this.items
 
@@ -53,6 +58,13 @@ export default {
       }
 
       return data
+    },
+    last () {
+      return this.filteredItems[this.filteredItems.length - 1]
+    },
+    reversedItems () {
+      const items = [...this.filteredItems]
+      return items.reverse()
     },
     searchedItems () {
       return this.items.filter(row => {
@@ -73,6 +85,14 @@ export default {
         }
         return (a === b ? 0 : a > b ? 1 : -1) * this.sort.order
       })
+    },
+    tail () {
+      return this.filteredItems.length > 1
+        ? this.filteredItems.slice(1)
+        : this.filteredItems
+    },
+    uniqueItems () {
+      return this.filteredItems.filter(item => this.filteredItems.indexOf(item) === this.filteredItems.lastIndexOf(item))
     }
   },
   created () {
@@ -90,8 +110,12 @@ export default {
   },
   render () {
     return this.$scopedSlots.default({
+      head: this.head,
       items: this.filteredItems,
-      sort: this.sortBy
+      last: this.last,
+      reversedItems: this.reversedItems,
+      sort: this.sortBy,
+      tail: this.tail
     })
   }
 }
