@@ -23,6 +23,9 @@ export default {
   },
   inject: ['tabs'],
   computed: {
+    _children () {
+      return this.isScoped ? this._scopedSlotContent : this.$slots.default
+    },
     getAria () {
       const isActive = this.index === this.tabs.getActiveIndex
 
@@ -33,22 +36,19 @@ export default {
           'aria-selected': String(isActive)
         }
       }
-    }
-  },
-  render (h) {
-    let children
-    const isScoped = this.$scopedSlots.default
-
-    if (isScoped) {
-      children = this.$scopedSlots.default({
+    },
+    isScoped () {
+      return this.$scopedSlots.default
+    },
+    _scopedSlotContent () {
+      return this.$scopedSlots.default({
         aria: this.noAria ? { ...this.getAria.attrs } : null,
         index: this.index,
         updateActiveIndex: this.updateIndex
       })
-    } else {
-      children = this.$slots.default
     }
-
+  },
+  render (h) {
     return h(this.tag, {
       attrs: !this.noAria ? { ...this.getAria.attrs } : null,
       on: {
@@ -58,7 +58,7 @@ export default {
           }
         }
       }
-    }, children)
+    }, this._children)
   }
 }
 </script>

@@ -10,36 +10,41 @@ export default {
       default: 'div'
     }
   },
-  inject: ['updateIndex'],
-  render (h) {
-    const children = this.$slots.default.map((child, index) => {
+  inject: [
+    'updateIndex'
+  ],
+  computed: {
+    _scopedSlotContent () {
+      return this.$slots.default.map(this._cloneChildren)
+    }
+  },
+  methods: {
+    _cloneChildren (child, index) {
       const options = child.componentOptions
       if (options && toPascal(options.tag) === 'BansheeTab') {
         const props = {
           index,
-          vertical: this.vertical,
           updateIndex: () => {
             this.updateIndex(index)
           },
           ...options.propsData
         }
 
-        return h(BansheeTab, {
+        return this.$createElement(BansheeTab, {
           ...child.data,
-          props: {
-            ...props
-          }
+          props: { ...props }
         }, options.children)
       }
 
       return child
-    })
-
+    }
+  },
+  render (h) {
     return h(this.tag, {
       attrs: {
         role: 'tablist'
       }
-    }, children)
+    }, this._scopedSlotContent)
   }
 }
 </script>

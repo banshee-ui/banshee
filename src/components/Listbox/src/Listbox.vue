@@ -37,6 +37,23 @@ export default {
     },
     currentItemDOM () {
       return this.$el.querySelectorAll('[role="option"]')[this.focusedIndex]
+    },
+    _children () {
+      return this.$slots.default.map(this._cloneChildren)
+    },
+    _scopedSlotContent () {
+      return this.$scopedSlots.default
+        ? this.$scopedSlots.default({
+          items: this.items,
+          focus: this.focusItem,
+          focused: this.focusedIndex,
+          selectItem: this.selectItem,
+          selectedItems: this.selected,
+          total: this.items.length,
+          totalSelected: this.selected.length,
+          transfer: this.transfer
+        })
+        : null
     }
   },
   mounted () {
@@ -47,6 +64,38 @@ export default {
     this._handleDefaultSelected()
   },
   methods: {
+    _cloneChildren (child) {
+      const options = child.componentOptions
+
+      if (options && toPascal(options.tag) === BansheeListboxItem.name) {
+        return this.items.map((item, index) => {
+          let key
+
+          // If item is not an object
+          if (item[this.itemKey]) {
+            key = item[this.itemKey]
+          } else {
+            key = `${item}-${index}`
+          }
+
+          return this.$createElement(BansheeListboxItem, {
+            props: {
+              item,
+              index,
+              focus: this.focusItem,
+              focused: this.focusedIndex,
+              selected: this.selected,
+              selectItem: this.selectItem,
+              ...options.propsData
+            },
+            key,
+            ...child.data
+          })
+        })
+      }
+
+      return child
+    },
     _handleDefaultSelected () {
       if (!Array.isArray(this.defaultSelected)) {
         const index = parseInt(this.defaultSelected)
@@ -140,52 +189,6 @@ export default {
     }
   },
   render (h) {
-    const children = this.$slots.default.map(child => {
-      const options = child.componentOptions
-
-      if (options && toPascal(options.tag) === BansheeListboxItem.name) {
-        return this.items.map((item, index) => {
-          let key
-
-          // If item is not an object
-          if (item[this.itemKey]) {
-            key = item[this.itemKey]
-          } else {
-            key = `${item}-${index}`
-          }
-
-          return h(BansheeListboxItem, {
-            props: {
-              item,
-              index,
-              focus: this.focusItem,
-              focused: this.focusedIndex,
-              selected: this.selected,
-              selectItem: this.selectItem,
-              ...options.propsData
-            },
-            key,
-            ...child.data
-          })
-        })
-      }
-
-      return child
-    })
-
-    const scopedSlot = this.$scopedSlots.default
-      ? this.$scopedSlots.default({
-        items: this.items,
-        focus: this.focusItem,
-        focused: this.focusedIndex,
-        selectItem: this.selectItem,
-        selectedItems: this.selected,
-        total: this.items.length,
-        totalSelected: this.selected.length,
-        transfer: this.transfer
-      })
-      : null
-
     return h(this.tag, {
       attrs: {
         role: 'listbox',
@@ -195,7 +198,7 @@ export default {
         dblclick: this.selectItem,
         keydown: this.handleEvent
       }
-    }, [children, scopedSlot])
+    }, [this._children, this._scopedSlotContent])
   }
 }
 </script>

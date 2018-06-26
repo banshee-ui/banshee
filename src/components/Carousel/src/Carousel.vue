@@ -72,8 +72,38 @@ export default {
     length () {
       return this.carouselSlides.length
     },
-    otherCarouselContent () {
+    _otherCarouselContent () {
       return this.$slots.default.filter(child => !child.componentOptions ? child : null)
+    },
+    _scopedSlotContent () {
+      return this.$scopedSlots.default
+        ? this.$scopedSlots.default({
+          activeIndex: this.currentIndex,
+          btnAttrs: {
+            buttons: {
+              'aria-label': 'Carousel Buttons',
+              'aria-controls': this.id
+            },
+            next: {
+              'aria-label': 'next'
+            },
+            pause: {
+              'aria-label': 'pause'
+            },
+            play: {
+              'aria-label': 'play'
+            },
+            previous: {
+              'aria-label': 'previous'
+            }
+          },
+          length: this.length,
+          next: this.nextSlide,
+          pause: this.pause,
+          play: this.play,
+          previous: this.previousSlide
+        })
+        : null
     }
   },
   methods: {
@@ -117,35 +147,6 @@ export default {
     }
   },
   render (h) {
-    const scopedSlots = this.$scopedSlots.default
-      ? this.$scopedSlots.default({
-        activeIndex: this.currentIndex,
-        btnAttrs: {
-          buttons: {
-            'aria-label': 'Carousel Buttons',
-            'aria-controls': this.id
-          },
-          next: {
-            'aria-label': 'next'
-          },
-          pause: {
-            'aria-label': 'pause'
-          },
-          play: {
-            'aria-label': 'play'
-          },
-          previous: {
-            'aria-label': 'previous'
-          }
-        },
-        length: this.length,
-        next: this.nextSlide,
-        pause: this.pause,
-        play: this.play,
-        previous: this.previousSlide
-      })
-      : null
-
     const slide = h('transition', {
       props: {
         name: this.transitionName,
@@ -159,7 +160,7 @@ export default {
         id: this.id,
         tabindex: 0
       }
-    }, [slide, this.otherCarouselContent, scopedSlots])
+    }, [slide, this._otherCarouselContent, this._scopedSlotContent])
   }
 }
 </script>

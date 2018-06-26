@@ -31,6 +31,16 @@ export default {
       default: 'div'
     }
   },
+  computed: {
+    _scopedSlotContent () {
+      return this.$scopedSlots.default({
+        active: this.focused === this.index,
+        item: this.item,
+        index: this.index,
+        selected: this.selected.includes(this.item)
+      })
+    }
+  },
   render (h) {
     return h(this.tag, {
       attrs: {
@@ -42,12 +52,7 @@ export default {
           this.focus(this.index)
         }
       }
-    }, this.$scopedSlots.default({
-      active: this.focused === this.index,
-      item: this.item,
-      index: this.index,
-      selected: this.selected.includes(this.item)
-    }))
+    }, this._scopedSlotContent)
   }
 }
 </script>
