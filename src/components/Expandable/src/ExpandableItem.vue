@@ -22,14 +22,15 @@ export default {
     },
     isScoped () {
       return this.$scopedSlots.default
+    },
+    _children () {
+      return this.isScoped
+        ? this.$scopedSlots.default({ isActive: this.isActive })
+        : this.$slots.default
     }
   },
   render (h) {
-    const children = this.isScoped
-      ? this.$scopedSlots.default({ isActive: this.isActive })
-      : this.$slots.default
-
-    return h(this.tag, children)
+    return h(this.tag, this._children)
   }
 }
 </script>

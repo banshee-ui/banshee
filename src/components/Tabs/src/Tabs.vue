@@ -24,8 +24,20 @@ export default {
     internalActive: 0
   }),
   computed: {
+    _children () {
+      return this.isScoped ? this._scopedSlotContent : this.$slots.default
+    },
     getActiveIndex () {
       return this.active >= 0 ? this.active : this.internalActive
+    },
+    isScoped () {
+      return this.$scopedSlots.default
+    },
+    _scopedSlotContent () {
+      return this.$scopedSlots.default({
+        active: this.getActiveIndex,
+        updateActiveIndex: this.updateActiveIndex
+      })
     }
   },
   mounted () {
@@ -39,19 +51,7 @@ export default {
     }
   },
   render (h) {
-    let children
-    const isScoped = this.$scopedSlots.default
-
-    if (isScoped) {
-      children = this.$scopedSlots.default({
-        active: this.getActiveIndex,
-        updateActiveIndex: this.updateActiveIndex
-      })
-    } else {
-      children = this.$slots.default
-    }
-
-    return h(this.tag, children)
+    return h(this.tag, this._children)
   }
 }
 </script>

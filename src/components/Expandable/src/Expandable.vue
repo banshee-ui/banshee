@@ -26,7 +26,33 @@ export default {
   data: () => ({
     internalActive: []
   }),
+  computed: {
+    _scopedSlotContent () {
+      return this.$scopedSlots.default
+        ? this.$scopedSlots.default({
+          active: this.internalActive,
+          update: this.updateActiveIndex
+        })
+        : null
+    }
+  },
   methods: {
+    _cloneChildren (child, index) {
+      const options = child.componentOptions
+
+      if (options && toPascal(options.tag) === BansheeExpandableItem.name) {
+        return this.$createElement(BansheeExpandableItem, {
+          ...child.data,
+          props: {
+            active: this.internalActive,
+            index,
+            ...options.propsData
+          }
+        }, options.children)
+      }
+
+      return child
+    },
     updateAccordionIndex (index) {
       if (this.internalActive.includes(index)) {
         this.internalActive = this.internalActive.filter(i => i !== index)
@@ -53,29 +79,7 @@ export default {
     }
   },
   render (h) {
-    const scoped = this.$scopedSlots.default
-      ? this.$scopedSlots.default({
-        active: this.internalActive,
-        update: this.updateActiveIndex
-      })
-      : null
-
-    const children = this.$slots.default.map((child, index) => {
-      const options = child.componentOptions
-
-      if (options && toPascal(options.tag) === BansheeExpandableItem.name) {
-        return h(BansheeExpandableItem, {
-          ...child.data,
-          props: {
-            active: this.internalActive,
-            index,
-            ...options.propsData
-          }
-        }, options.children)
-      }
-
-      return child
-    })
+    const children = this.$slots.default.map(this._cloneChildren)
 
     return h(this.tag, {
       attrs: {
@@ -83,7 +87,7 @@ export default {
       }
     }, [
       children,
-      scoped
+      this._scopedSlotContent
     ])
   }
 }
