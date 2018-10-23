@@ -30,12 +30,14 @@ export default {
       default: ''
     }
   },
-  data: () => ({
-    sort: {
-      by: this.sortKey,
-      order: 1
+  data () {
+    return {
+      sort: {
+        by: this.sortKey,
+        order: 1
+      }
     }
-  }),
+  },
   computed: {
     filteredItems () {
       let data = this.items
