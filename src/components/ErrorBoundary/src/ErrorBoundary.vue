@@ -1,13 +1,7 @@
 <script>
-import DefaultFallback from './DefaultFallback'
-
 export default {
   name: 'BansheeErrorBoundary',
   props: {
-    fallBack: {
-      type: Object,
-      default: () => DefaultFallback
-    },
     onError: {
       type: Function,
       default: null
@@ -19,11 +13,16 @@ export default {
   },
   data () {
     return {
-      error: null
+      error: null,
+      vm: null,
+      info: ''
     }
   },
   errorCaptured (err, vm, info = '') {
     this.error = true
+    this.vm = vm
+    this.info = info
+
     this.$emit('onErrorCaptured', { err, vm, info })
     if (this.onError) this.onError(err, vm, info)
     if (this.stopPropagation) return false
@@ -33,7 +32,11 @@ export default {
       console.warn('ErrorBoundary component must have child components.')
       return null
     }
-    return this.error ? h(this.fallBack) : this.$slots.default[0]
+    return this.error ? this.$scopedSlots.default({
+      error: this.error,
+      vm: this.vm,
+      info: this.info
+    }) : this.$slots.default[0]
   }
 }
 </script>
