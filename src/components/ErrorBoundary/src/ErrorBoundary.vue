@@ -14,12 +14,14 @@ export default {
   data () {
     return {
       error: null,
+      err: null,
       vm: null,
       info: ''
     }
   },
   errorCaptured (err, vm, info = '') {
     this.error = true
+    this.err = err
     this.vm = vm
     this.info = info
 
@@ -33,8 +35,7 @@ export default {
       return null
     }
     return this.error ? this.$scopedSlots.default({
-      error: this.error,
-      vm: this.vm,
+      err: this.err,
       info: this.info
     }) : this.$slots.default[0]
   }
