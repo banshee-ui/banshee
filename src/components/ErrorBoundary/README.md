@@ -22,7 +22,6 @@ Errors thrown in child components will automatically bubble up to the `BansheeEr
 
 | Name | Required | Type | Default | Description |
 | ---  | ---      | ---  | ---     | ---         |
-| fall-back | `false` | Object | `<default-fallback>` | the fallback component to show in case of error |
 | on-error | `false` | Function | `null` | callback function to execute in case an error is captured |
 | stop-propagation | `false` | Boolean | `false` | boolean to stop propagation of the error up the component tree |
 
@@ -32,30 +31,12 @@ Errors thrown in child components will automatically bubble up to the `BansheeEr
 | ---   | ---        | ---         |
 | onErrorCaptured | (error) | object returning  |
 
-### Fallback UI via `fall-back`
+### Scoped Slots
 
-We can provide a fallback UI to display via the `fall-back` prop.  It simply takes a Vue component to render.
-
-```html
-<template>
-  <BansheeErrorBoundary :fall-back="productError">
-    <ProductCard ... />
-  </BansheeErrorBoundary>
-</template>
-
-<script>
-import ProductErrorCard from '...'
-
-export default {
-  // ...
-  data () {
-    return {
-      productError: ProductErrorCard
-    }
-  }
-}
-</script>
-```
+| Property | Description |
+| ---      | ---         |
+| err      | the error that triggered the boundary |
+| info     | string containing information about the error |
 
 Furthermore, we can directly access the contents of the `BansheeErrorBoundary` component's `errorCaptured` hook either throw a callback or Vue's emit.
 
